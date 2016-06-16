@@ -1,0 +1,209 @@
+body {
+  padding-bottom: 10px;
+  /*background: #eeeeea url(../images/bg.png) !important;*/
+  font-family: 'Lato', sans-serif !important;
+}
+
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.content {
+    padding-top: 30px;
+}
+
+.content .jumbotron {
+  background: none !important;
+}
+
+.footer {
+  padding-top: 19px;
+  color: #777;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+.container {
+    max-width: 100% !important;
+    width: 100%;
+}
+}
+@media (min-width: 960px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 100% !important;
+  }
+}
+.container {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.jumbotron {
+  text-align: center;
+  border-bottom: 0px solid #e5e5e5;
+}
+.jumbotron h2 {
+  font-size: 65px;
+  font-weight: inherit;
+  font-style: italic;
+}
+
+.marketing {
+  margin: 30px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+
+@media screen and (min-width: 960px) {
+  /* Remove the padding we set earlier */
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  /* Remove the padding we set earlier */
+ 
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+#header-global {
+    height: 93px;
+    position: relative;
+    z-index: 1001;
+}
+
+#logo {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 7%;
+    z-index: 10;
+    width: 164px;
+    height: 111px;
+    background-color: #337AB7;
+    -moz-border-radius: 0em 5em 0em 5em;
+    border-radius: 0em 5em 0em 5em;
+}
+
+#logo .gad-logo {
+    display: block;
+    margin: 23px 0 0 7px;
+    height: 100%;
+    opacity: 1;
+    background: url(../images/logo-title.png) no-repeat 0 0;
+}
+
+#header-global .header-main nav{
+    padding-left: 250px;
+    padding-top: 45px;
+    position: absolute;
+    width:565px;
+    z-index: 1000;
+}
+
+#header-global .header-main nav li:active{
+    color: #000;
+    background-color: #eee;
+}
+#header-global .header-main nav a {
+    color: #fff;
+}
+#header-global .header-main nav a:hover {
+    color: #000;
+}
+#header-global .header-main nav>li+li {
+    margin-left: 5px;
+}
+#header-global:before {
+    content: "";
+    background: #333;
+    height: 39px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+#header-global:after {
+    content: "";
+    background: #444;
+    height: 54px;
+    width: 100%;
+    position: absolute;
+    top: 39px;
+    left: 0;
+    z-index: 0;
+}
+
+/* contactus and aboutus page */
+.contact,.about{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.polaroid-img a
+{
+  background: white;
+  display: inline;
+  float: left;
+  margin: 0 10% 20%;
+  padding: 10px 10px 40px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+  -moz-box-shadow: 0 4px 6px rgba(0,0,0,.3);
+  box-shadow: 0 4px 6px rgba(0,0,0,.3);
+  -webkit-transition: all .15s linear;
+  -moz-transition: all .15s linear;
+  transition: all .15s linear;
+  position:relative;
+  z-index:0;
+
+  -webkit-transform: rotate(4deg);  
+  -moz-transform: rotate(4deg); 
+  transform: rotate(4deg); 
+}
+
+.polaroid-img a:hover{
+  -webkit-transform: rotate(0deg); 
+  -moz-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform: scale(1.2); 
+  -moz-transform: scale(1.2);
+  transform: scale(1.2);
+  z-index:10;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
+  -moz-box-shadow: 0 10px 20px rgba(0,0,0,.7);
+  box-shadow: 0 10px 20px rgba(0,0,0,.7);
+}
+
+.polaroid-img img { 
+  display: block; 
+  width: inherit; 
+}

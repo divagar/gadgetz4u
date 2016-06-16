@@ -1,0 +1,19 @@
+{
+  "name": "gadgetz4u.in",
+  "short_name": "gadgetz4u.in",
+  "icons": [{
+        "src": "images/gadgetz4u.png",
+        "sizes": "128x128"
+      }, {
+        "src": "images/gadgetz4u.png",
+        "sizes": "152x152"
+      }, {
+        "src": "images/gadgetz4u.png",
+        "sizes": "144x144"
+      }, {
+        "src": "images/gadgetz4u.png",
+        "sizes": "192x192"
+      }],
+  "start_url": "index.html",
+  "display": "standalone",
+}
