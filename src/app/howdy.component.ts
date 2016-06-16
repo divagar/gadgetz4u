@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
 
 declare var jQuery:any;
 
@@ -13,7 +14,7 @@ declare var jQuery:any;
 export class HowdyComponent implements AfterViewInit {
     fbCategories: FirebaseObjectObservable<any>;
     fbCategoriesBrands: FirebaseObjectObservable<any>;
-    fbProducts: FirebaseObjectObservable<any>;
+    fbProducts: Observable<any[]>;
     fbProductDetails: FirebaseObjectObservable<any>;
     fbNewProduct: FirebaseListObservable<any>;
 
@@ -62,7 +63,11 @@ export class HowdyComponent implements AfterViewInit {
         
         var query: string = "/Gadgetz/" + this.selectedCategory + '/Brands/' + index + '/Products';
         console.log(query);
-        this.fbProducts = this.af.database.object(query);
+        this.fbProducts = this.af.database.list(query).map((_products) => {
+            return _products.map((_product) => {
+                return _product;
+            })
+        })
     }
 
     selectProduct(index: number, name: string) {

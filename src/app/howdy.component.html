@@ -42,8 +42,8 @@
                     <a (click)="newProduct()">Add New Product</a>
                 </li>
                 <li role="separator" class="divider"></li>
-                <li *ngFor="let product of fbProducts | async; let index = index">
-                    <a (click)="selectProduct(index, product.Name)">{{product.Name}}</a>
+                <li *ngFor="let product of fbProducts | async">
+                    <a (click)="selectProduct(product.$key, product.Name)">{{product.Name}}</a>
                 </li>
             </ul>
         </div>
