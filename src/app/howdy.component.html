@@ -1,10 +1,13 @@
-<div class="howdy row">
+<div class="howdy row" *ngIf="loginUser.user">
 
     <div class="col-md-12">
-        <p>H o w d y | D a s h b o a r d</p>
-
+        <p>G a d g e t z 4 u | D a s h b o a r d</p>
+        <div class='howdyLogin'>
+            <span>{{loginUser.user.auth.email}} logged in | </span>
+            <a (click)='howdyLogout()'>Logout</a>
+        </div>
         <!-- categories -->
-        <div class="btn-group">
+        <div class="btn-group" *ngIf="fbCategories">
             <button type="button" id="btnCategory" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Categories 
@@ -18,7 +21,7 @@
         </div>
 
         <!-- brand -->
-        <div class="btn-group">
+        <div class="btn-group" *ngIf="fbCategoriesBrands">
             <button type="button" id="btnBrand" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Brand 
                 <span class="caret"></span>
@@ -31,7 +34,7 @@
         </div>
 
         <!-- Product -->
-        <div class="btn-group">
+        <div class="btn-group" *ngIf="fbProducts">
             <button type="button" id="btnProduct" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Product 
@@ -48,9 +51,12 @@
             </ul>
         </div>
 
-        <div class='selectedProduct'>
+        <div class='selectedProduct' *ngIf="selectedCategory">
             <div class="title">
-                S e l e c t e d P r o d u c t | {{selectedCategory}} > {{selectedBrand}} > {{selectedProduct}}
+                S e l e c t e d P r o d u c t |
+                <span> {{selectedCategory}} </span>
+                <span *ngIf="selectedBrand"> > {{selectedBrand}} </span>
+                <span *ngIf="selectedProduct"> > {{selectedProduct}} </span>
             </div>
             <!-- product details -->
             <div *ngIf="selectedProduct || addNewProduct">
@@ -72,7 +78,9 @@
                 <br/>
                 <div class="input-group">
                     <span class="input-group-addon">Details</span>
-                    <textarea class="form-control" rows="7" #pDetails>{{ (fbProductDetails | async)?.Details }}</textarea>
+                    <textarea tinyMCE class="form-control tinyMCE" rows="7" #pDetails>
+                        {{ loadTinyMCE((fbProductDetails | async)?.Details) }}
+                    </textarea>
                 </div>
                 <br/>
                 <div class="input-group">
@@ -91,12 +99,36 @@
                 <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" (click)="updateProduct(pName.value, pDesc.value, pImgLink.value, pDetails.value, pMRP.value, pPrice.value)">
                     Update
                 </button>
-                <button *ngIf="selectedProduct" type="submit" class="btn btn-danger" (click)="deleteProduct()">
+                <button *ngIf="selectedProduct" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal">
                     Delete
                 </button>
             </div>
         </div>
-
+        <!-- alert start -->
+        <div class="alert alert-{{howdyAlertType}} alert-dismissible" *ngIf="howdyAlert" role="alert">
+            <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
+            <strong>{{howdyAlertType}}: </strong> {{howdyAlertMsg}}
+        </div>
+        <!-- alert end -->
     </div>
+</div>
 
+
+<!-- delete modal dialog -->
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteProductModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Product</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteProduct()">Yes</button>
+            </div>
+        </div>
+    </div>
 </div>

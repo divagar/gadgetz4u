@@ -13,7 +13,7 @@ module.exports = function(defaults) {
       'rxjs/**/*.js',
       '@angular/**/*.js',
       'angularfire2/**/*.js',
-      'firebase/lib/*.js'
+      'firebase/*.js'
     ]
   });
 };

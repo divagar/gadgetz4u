@@ -1,0 +1,14 @@
+.login {
+  width: 40%;
+}
+
+.btn {
+  float: right;
+}
+
+.alert {
+    width: 40%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}

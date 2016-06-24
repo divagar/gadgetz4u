@@ -18,6 +18,11 @@ body {
   background: none !important;
 }
 
+.content .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .footer {
   padding-top: 19px;
   color: #777;
@@ -25,22 +30,22 @@ body {
 }
 
 @media (min-width: 768px) {
-.container {
+.container-fluid {
     max-width: 100% !important;
     width: 100%;
 }
 }
 @media (min-width: 960px) {
-  .container {
+  .container-fluid {
     max-width: 100% !important;
   }
 }
 @media (min-width: 1200px) {
-  .container {
+  .container-fluid {
     width: 100% !important;
   }
 }
-.container {
+.container-fluid {
   padding-left: 0px !important;
   padding-right: 0px !important;
 }

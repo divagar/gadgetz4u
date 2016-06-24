@@ -29,3 +29,15 @@
 #ddProduct .divider {
     margin: 0;
 }
+
+div.alert {
+    margin-top: 10px;
+}
+
+div.howdyLogin {
+    float: right;
+}
+
+div.howdyLogin span {
+    font-style: italic;
+}

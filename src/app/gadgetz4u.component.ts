@@ -4,6 +4,7 @@ import { ProductsComponent } from './products.component';
 import { ContactComponent } from './contact.component';
 import { AboutComponent } from './about.component';
 import { HowdyComponent } from './howdy.component';
+import { LoginComponent } from './login.component';
 import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 @Component({
@@ -16,8 +17,11 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
 })
 
 @Routes([
+    {
+    path: '/login', component: LoginComponent
+  },
   {
-    path: '/', component: HomeComponent
+    path: '/howdy', component: HowdyComponent
   },
   {
     path: '/home', component: HomeComponent
@@ -26,13 +30,16 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
     path: '/products', component: ProductsComponent
   },
   {
+    path: '/products/:', component: ProductsComponent
+  },
+  {
     path: '/contact', component: ContactComponent
   },
   {
     path: '/about', component: AboutComponent
   },
   {
-    path: '/howdy', component: HowdyComponent
+    path: '/', component: HomeComponent
   }
 ])
 

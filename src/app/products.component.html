@@ -1,14 +1,123 @@
 <div class="products row">
-    <div class="polaroid-img col-md-4">
-        <a href="javascript:void(0)">
-            <img height="450px" src="images/product.png" alt="Product" />
-        </a>
-    </div>
-    <div class="col-md-8">
-        <div class="jumbotron">
-            <h2>Coming soon</h2>
-            <p class="lead">
-                Stay tuned !</p>
+    <div *ngIf="fbCategories != null" class="row">
+        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 mmBar">
+
+            <div class="mmBarRoute">
+                <a (click)="selectDefault()">All</a>
+                <span class="selectedCategory" *ngIf="selectedCategory">{{selectedCategory}}</span>
+            </div>
+
+            <ul *ngIf="!selectedCategory">
+                <li *ngFor="let categories of fbCategories | async;">
+                    <a class="mmLink" [routerLink]="['/products', { c: categories.name }]">
+                        <!--(click)="selectCategory(categories.name)">-->
+                        {{categories.name}}
+                    </a>
+                </li>
+            </ul>
+            <ul *ngIf="selectedCategory">
+                <li *ngFor="let brand of fbCategoriesBrands | async; let index = index">
+                    <a class="mmLink" [routerLink]="['/products', { c: selectedCategory, bId: index, b: brand.name }]">
+                        <!--(click)="selectBrand(index, brand.name)"> -->
+                        {{brand.name}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-6 col-sm-8 col-md-10 col-lg-10 pDetailsPane">
+            <router-outlet>
+                <!-- product nav - starts -->
+                <div class="row">
+                    <div class="col-md-12 pNav">
+                        <a (click)="selectDefault()">
+                            All
+                        </a>
+                        <a *ngIf="selectedCategory" [routerLink]="['/products', { c: selectedCategory }]">
+                            {{selectedCategory}}
+                        </a>
+                        <a *ngIf="selectedBrand" [routerLink]="['/products', { c: selectedCategory, bId: selectedBrandId, b: selectedBrand }]">
+                            {{selectedBrand}}
+                        </a>
+                        <span class="selectedProduct">
+                            {{selectedProduct}}
+                        </span>
+                    </div>
+                </div>
+                <!-- product nav - ends -->
+
+                <!-- product tile dynamic content start -->
+                <div class="productTile row row-centered" *ngIf="!selectedProductId">
+                    <div class='col-xs-12 col-sm-4 col-md-3 col-lg-2 col-centered' *ngFor="let product of fbProducts | async">
+                        <a class='nostyle' [routerLink]="['/products', 
+                                                            { c: selectedCategory, 
+                                                              bId: selectedBrandId, 
+                                                              b: selectedBrand, 
+                                                              pId: product.$key,
+                                                              p: product.Name}]">
+                            <div class='pHeader'>
+                                <h3>{{product.Name}}</h3>
+                                <h6>{{product.Description}}</h6>
+                                <hr/>
+                            </div>
+                            <div class='pContent'>
+                                <img src='{{product.ImageLink}}'>
+                            </div>
+                            <div class="pFooter">
+                                <hr/>
+                                <div class='mrp'>{{product.MRP}}</div>
+                                <div class='price'>{{product.Price}}</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+                <!-- product tile dynamic content ends -->
+
+                <!-- product details dynamic content start -->
+                <div class="productDetails row row-centered" *ngIf="fbProductDetails">
+                    <div class="col-md-4 pImage">
+                        <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="image-responsive" />
+                    </div>
+                    <div class="col-md-8 pDetails">
+                        <div class="row">
+                            <div class="col-md-12 pName">
+                                <h1>{{ (fbProductDetails | async)?.Name }}</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pDescription">
+                                <span class="monospaced">{{ (fbProductDetails | async)?.Description }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pPrice">
+                                <div>
+                                    <span class="mrp">{{ (fbProductDetails | async)?.MRP }}</span>
+                                    <span class="per label label-success">{{ calcPer((fbProductDetails | async)?.Price, (fbProductDetails | async)?.MRP) }}</span>
+                                </div>
+                                <div>
+                                    <span class="price">{{ (fbProductDetails | async)?.Price }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 pDetails">
+                        <div class="row">
+                            <div class="col-md-12 pName">
+                                <h3>Details</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pName">
+                                <span [innerHtml]="(fbProductDetails | async)?.Details"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product details dynamic content ends -->
+                </div>
+            </router-outlet>
         </div>
     </div>
 </div>
