@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["index.ts"],"names":[],"mappings":";AAAA,4BAA0B,eAAe,CAAC;AAAlC,gDAAkC;AAC1C,oCAAoC,uBAAuB,CAAC;AAApD,4EAAoD","sourcesContent":["export {environment} from './environment';\nexport {Gadgetz4uAppComponent} from './gadgetz4u.component';\n"]}
