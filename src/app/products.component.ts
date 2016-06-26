@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -23,10 +24,15 @@ export class ProductsComponent implements OnInit {
     selectedProduct: string;
     selectedProductId: string;
 
+    productAlert: boolean;
+    productAlertMsg: string;
+    productAlertType: string;
+
     constructor(
         public af: AngularFire,
         public router: Router,
-        public params: RouteSegment) {
+        public params: RouteSegment,
+        public sanitizer: DomSanitizationService) {
         this.fbCategories = af.database.object('/Gadgetz/Categories');
 
         //Route params
@@ -92,7 +98,7 @@ export class ProductsComponent implements OnInit {
     }
 
     selectProduct(id: string, name: string) {
-        this.selectedProduct = name;
+        this.selectedProduct = decodeURIComponent(name);
         this.selectedProductId = id;
 
         var query: string = "/Gadgetz/" + this.selectedCategory + '/Brands/' + this.selectedBrandId + '/Products/' + id;
@@ -109,5 +115,27 @@ export class ProductsComponent implements OnInit {
             if (iPer != 0)
                 return ("Save " + iPer + " %");
         }
+    }
+
+    isBrandActive(brand: string) {
+        let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
+        let parameters = currentRoute == null ? null : currentRoute.parameters['b'];
+        return parameters == brand;
+    }
+
+    encodeURIComponent(str) {
+        return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+            return '%' + c.charCodeAt(0).toString(16);
+        });
+    }
+
+    /* Alert */
+    productalert(type, msg, status) {
+        this.productAlertType = type;
+        this.productAlertMsg = msg;
+        this.productAlert = status;
+    }
+    closeAlert() {
+        this.productAlert = false;
     }
 }

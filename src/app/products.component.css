@@ -40,6 +40,9 @@
 .mmBar li a:hover {
     text-decoration: none;
 }
+.mmBar .active {
+    font-weight: bold;
+}
 
 .mmLink {
     position: relative;
@@ -52,9 +55,6 @@
     position: absolute;
     right: 15px;
     color: #2a2b30;
-}
-.mmLink.router-link-active {
-    font-weight: bold;
 }
 
 /* product tile - starts*/
@@ -189,5 +189,16 @@
 .productDetails .pPrice .per{
     font-size: 100%;
     padding: 5px 5px;
+}
+.productDetails .pShare {
+    margin-top: 40px;
+}
+.productDetails .pDetails p.pTitle {
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 1px;
+    margin-top: 20px;
+    font-size: 130%;
 }
 /* product details pane - ends */

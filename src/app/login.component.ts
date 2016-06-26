@@ -60,6 +60,7 @@ export class LoginComponent {
     this.user = user;
   }
   checkCredentials() {
+    console.log(this.user);
     if (this.user != null)
       this.router.navigate(['/howdy']);
     else

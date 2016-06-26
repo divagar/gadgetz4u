@@ -96,7 +96,6 @@ body {
   }
 }
 
-
 #header-global {
     height: 93px;
     position: relative;
@@ -118,7 +117,7 @@ body {
 
 #logo .gad-logo {
     display: block;
-    margin: 23px 0 0 7px;
+    margin: 15px 0 0 7px;
     height: 100%;
     opacity: 1;
     background: url(../images/logo-title.png) no-repeat 0 0;

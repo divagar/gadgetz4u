@@ -17,7 +17,7 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
 })
 
 @Routes([
-    {
+  {
     path: '/login', component: LoginComponent
   },
   {
@@ -47,5 +47,9 @@ export class Gadgetz4uAppComponent {
 
   public constructor(public router: Router) { };
 
-
+  isRouteActive(path: string) {
+    let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
+    let segment = currentRoute == null ? '/' : currentRoute.segment;
+    return segment == path;
+  }
 }
