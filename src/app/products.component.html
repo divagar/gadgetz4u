@@ -133,7 +133,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <span [innerHtml]="(fbProductDetails | async)?.Details"></span>
+                                <span [innerHtml]="sanitizer.bypassSecurityTrustHtml((fbProductDetails | async)?.Details)"></span>
                             </div>
                         </div>
                     </div>
