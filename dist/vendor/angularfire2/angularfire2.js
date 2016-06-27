@@ -27,6 +27,7 @@ var firebase_object_factory_1 = require('./utils/firebase_object_factory');
 exports.FirebaseObjectFactory = firebase_object_factory_1.FirebaseObjectFactory;
 var utils = require('./utils/utils');
 var tokens_1 = require('./tokens');
+exports.WindowLocation = tokens_1.WindowLocation;
 var auth_backend_1 = require('./providers/auth_backend');
 exports.AuthMethods = auth_backend_1.AuthMethods;
 exports.AuthProviders = auth_backend_1.AuthProviders;
@@ -69,7 +70,11 @@ exports.FIREBASE_PROVIDERS = [
         provide: auth_backend_1.AuthBackend,
         useFactory: _getAuthBackend,
         deps: [tokens_1.FirebaseApp]
-    }
+    },
+    {
+        provide: tokens_1.WindowLocation,
+        useValue: window.location
+    },
 ];
 function _getAuthBackend(app) {
     return new firebase_sdk_auth_backend_1.FirebaseSdkAuthBackend(app, false);

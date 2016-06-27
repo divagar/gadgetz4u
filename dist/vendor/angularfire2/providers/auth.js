@@ -35,7 +35,7 @@ exports.firebaseAuthConfig = function (config) {
 };
 var AngularFireAuth = (function (_super) {
     __extends(AngularFireAuth, _super);
-    function AngularFireAuth(_authBackend, _config) {
+    function AngularFireAuth(_authBackend, loc, _config) {
         var _this = this;
         _super.call(this, kBufferSize);
         this._authBackend = _authBackend;
@@ -46,14 +46,16 @@ var AngularFireAuth = (function (_super) {
             .mergeMap(function (authState) {
             if (firstPass) {
                 firstPass = false;
-                return _this._authBackend.getRedirectResult()
-                    .map(function (userCredential) {
-                    if (userCredential && userCredential.credential) {
-                        authState = attachCredentialToAuthState(authState, userCredential.credential, userCredential.credential.provider);
-                        _this._credentialCache[userCredential.credential.provider] = userCredential.credential;
-                    }
-                    return authState;
-                });
+                if (['http:', 'https:'].indexOf(loc.protocol) > -1) {
+                    return _this._authBackend.getRedirectResult()
+                        .map(function (userCredential) {
+                        if (userCredential && userCredential.credential) {
+                            authState = attachCredentialToAuthState(authState, userCredential.credential, userCredential.credential.provider);
+                            _this._credentialCache[userCredential.credential.provider] = userCredential.credential;
+                        }
+                        return authState;
+                    });
+                }
             }
             return Observable_1.Observable.of(authState);
         })
@@ -160,9 +162,10 @@ var AngularFireAuth = (function (_super) {
     };
     AngularFireAuth = __decorate([
         core_1.Injectable(),
-        __param(1, core_1.Optional()),
-        __param(1, core_1.Inject(tokens_1.FirebaseAuthConfig)), 
-        __metadata('design:paramtypes', [auth_backend_1.AuthBackend, Object])
+        __param(1, core_1.Inject(tokens_1.WindowLocation)),
+        __param(2, core_1.Optional()),
+        __param(2, core_1.Inject(tokens_1.FirebaseAuthConfig)), 
+        __metadata('design:paramtypes', [auth_backend_1.AuthBackend, Location, Object])
     ], AngularFireAuth);
     return AngularFireAuth;
 }(ReplaySubject_1.ReplaySubject));

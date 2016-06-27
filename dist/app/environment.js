@@ -1,5 +1,5 @@
 "use strict";
 exports.environment = {
-    production: true
+    production: false
 };
 //# sourceMappingURL=environment.js.map

@@ -18,7 +18,7 @@ import { FirebaseObjectObservable } from './utils/firebase_object_observable';
 import { FirebaseListFactory } from './utils/firebase_list_factory';
 import { FirebaseObjectFactory } from './utils/firebase_object_factory';
 import * as utils from './utils/utils';
-import { FirebaseConfig, FirebaseApp } from './tokens';
+import { FirebaseConfig, FirebaseApp, WindowLocation } from './tokens';
 import { AuthBackend, AuthMethods, AuthProviders } from './providers/auth_backend';
 import { FirebaseSdkAuthBackend } from './providers/firebase_sdk_auth_backend';
 import { FirebaseDatabase } from './database/database';
@@ -56,7 +56,11 @@ export const FIREBASE_PROVIDERS = [
         provide: AuthBackend,
         useFactory: _getAuthBackend,
         deps: [FirebaseApp]
-    }
+    },
+    {
+        provide: WindowLocation,
+        useValue: window.location
+    },
 ];
 function _getAuthBackend(app) {
     return new FirebaseSdkAuthBackend(app, false);
@@ -67,7 +71,7 @@ export const defaultFirebase = (config) => {
         useValue: config
     });
 };
-export { AngularFireAuth, FirebaseAuth, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable, FirebaseListFactory, FirebaseObjectFactory, firebaseAuthConfig, AuthMethods, AuthProviders };
+export { AngularFireAuth, FirebaseAuth, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable, FirebaseListFactory, FirebaseObjectFactory, firebaseAuthConfig, AuthMethods, AuthProviders, WindowLocation };
 export { FirebaseConfig, FirebaseApp, FirebaseAuthConfig, FirebaseRef, FirebaseUrl } from './tokens';
 export default {
     providers: FIREBASE_PROVIDERS

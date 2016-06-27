@@ -1,6 +1,7 @@
 "use strict";
-var environment_1 = require('./environment');
-exports.environment = environment_1.environment;
-var gadgetz4u_component_1 = require('./gadgetz4u.component');
-exports.Gadgetz4uAppComponent = gadgetz4u_component_1.Gadgetz4uAppComponent;
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(require('./environment'));
+__export(require('./gadgetz4u.component'));
 //# sourceMappingURL=index.js.map

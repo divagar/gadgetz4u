@@ -18,7 +18,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/concat';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/observable/of';
-import { FirebaseAuthConfig } from '../tokens';
+import { FirebaseAuthConfig, WindowLocation } from '../tokens';
 import { isPresent } from '../utils/utils';
 import { authDataToAuthState, AuthBackend, AuthMethods, stripProviderId } from './auth_backend';
 const kBufferSize = 1;
@@ -28,7 +28,7 @@ export const firebaseAuthConfig = (config) => {
     });
 };
 export let AngularFireAuth = class AngularFireAuth extends ReplaySubject {
-    constructor(_authBackend, _config) {
+    constructor(_authBackend, loc, _config) {
         super(kBufferSize);
         this._authBackend = _authBackend;
         this._config = _config;
@@ -38,14 +38,16 @@ export let AngularFireAuth = class AngularFireAuth extends ReplaySubject {
             .mergeMap((authState) => {
             if (firstPass) {
                 firstPass = false;
-                return this._authBackend.getRedirectResult()
-                    .map((userCredential) => {
-                    if (userCredential && userCredential.credential) {
-                        authState = attachCredentialToAuthState(authState, userCredential.credential, userCredential.credential.provider);
-                        this._credentialCache[userCredential.credential.provider] = userCredential.credential;
-                    }
-                    return authState;
-                });
+                if (['http:', 'https:'].indexOf(loc.protocol) > -1) {
+                    return this._authBackend.getRedirectResult()
+                        .map((userCredential) => {
+                        if (userCredential && userCredential.credential) {
+                            authState = attachCredentialToAuthState(authState, userCredential.credential, userCredential.credential.provider);
+                            this._credentialCache[userCredential.credential.provider] = userCredential.credential;
+                        }
+                        return authState;
+                    });
+                }
             }
             return Observable.of(authState);
         })
@@ -154,9 +156,10 @@ export let AngularFireAuth = class AngularFireAuth extends ReplaySubject {
 };
 AngularFireAuth = __decorate([
     Injectable(),
-    __param(1, Optional()),
-    __param(1, Inject(FirebaseAuthConfig)), 
-    __metadata('design:paramtypes', [AuthBackend, Object])
+    __param(1, Inject(WindowLocation)),
+    __param(2, Optional()),
+    __param(2, Inject(FirebaseAuthConfig)), 
+    __metadata('design:paramtypes', [AuthBackend, Location, Object])
 ], AngularFireAuth);
 function attachCredentialToAuthState(authState, credential, providerId) {
     if (!authState)
