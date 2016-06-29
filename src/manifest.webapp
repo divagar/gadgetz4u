@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "name": "gadgetz4u.in",
+  "launch_path": "index.html",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "best deal on your gadget.",
+  "icons": {
+    "128": "/images/gadgetz4u.png"
+  },
+  "developer": {
+    "name": "",
+    "url": ""
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "gadgetz4u.in",
+      "description": "desc..."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth != null",
+    "users": {
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "Products": {
+      ".indexOn": [
+        "Brands",
+        "Categories"
+      ]
+    }
+  }
+}
