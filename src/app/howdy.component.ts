@@ -96,8 +96,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         console.log(query);
         this.fbProducts = this.af.database.list(query, {
             query: {
-                orderByChild: "Brands",
-                equalTo: pBrand
+                orderByChild: "Categories_Brands",
+                equalTo: this.selectedCategory + '_' + pBrand
             }
         }).map((_products) => {
             return _products.map((_product) => {
@@ -149,6 +149,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         data = {
             'Categories': this.selectedCategory,
             'Brands': this.selectedBrand,
+            'Categories_Brands': this.selectedCategory + "_" + this.selectedBrand,
             'Name': name,
             'Description': desc,
             'ImageLink': imgUrl,

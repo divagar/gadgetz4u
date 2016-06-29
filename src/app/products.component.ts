@@ -111,8 +111,8 @@ export class ProductsComponent implements OnInit {
         console.log(query);
         this.fbProducts = this.af.database.list(query, {
             query: {
-                orderByChild: "Brands",
-                equalTo: pBrand
+                orderByChild: "Categories_Brands",
+                equalTo: this.selectedCategory + '_' + pBrand
             }
         }).map((_products) => {
             return _products.map((_product) => {
