@@ -1,1 +1,0 @@
-{"version":3,"file":"environment.js","sourceRoot":"","sources":["file:///c:/my_work/projects/myAngular/gadgetz4u/tmp/broccoli_type_script_compiler-input_base_path-seXjd9zV.tmp/0/src/app/environment.ts"],"names":[],"mappings":";AAAa,mBAAW,GAAG;IACzB,UAAU,EAAE,KAAK;CAClB,CAAC","sourcesContent":["export const environment = {\n  production: false\n};\n"]}
