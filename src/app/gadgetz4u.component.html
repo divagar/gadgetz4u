@@ -5,27 +5,29 @@
     </a>
     <div class="head header-main">
       <nav class="navbar">
-        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+        <div class="container-fluid">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
-        </button>-->
-        <!--<div class="collapse navbar-collapse" id="myNav">-->
-        <ul class="nav nav-pills pull-right">
-          <li role="presentation" [class.active]="isRouteActive('home')">
+        </button>
+        <div class="collapse navbar-collapse" id="myNav">
+        <ul class="nav navbar-nav pull-right">
+          <li [class.active]="isRouteActive('home')">
             <a [routerLink]="['/home']" id="home">Home</a>
           </li>
-          <li role="presentation" [class.active]="isRouteActive('products')">
+          <li [class.active]="isRouteActive('products')">
             <a [routerLink]="['/products']" id="products">Products</a>
           </li>
-          <li role="presentation" [class.active]="isRouteActive('about')">
+          <li [class.active]="isRouteActive('about')">
             <a [routerLink]="['/about']" id="about">About</a>
           </li>
-          <li role="presentation" [class.active]="isRouteActive('contact')">
+          <li [class.active]="isRouteActive('contact')">
             <a [routerLink]="['/contact']" id="contact">Contact</a>
           </li>
         </ul>
-        <!--</div>-->
+        </div>
+        </div>
       </nav>
     </div>
   </div>

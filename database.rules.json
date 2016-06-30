@@ -10,7 +10,8 @@
     "Products": {
       ".indexOn": [
         "Brands",
-        "Categories"
+        "Categories",
+        "Categories_Brands"
       ]
     }
   }

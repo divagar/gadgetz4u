@@ -1,6 +1,7 @@
 body {
   padding-bottom: 10px;
   /*background: #eeeeea url(../images/bg.png) !important;*/
+  /*background: #F6F7F9 !important;*/
   font-family: 'Lato', sans-serif !important;
 }
 
@@ -11,13 +12,11 @@ body {
 }
 
 .content {
-    padding-top: 30px;
+    padding-top: 20px;
 }
-
 .content .jumbotron {
   background: none !important;
 }
-
 .content .row {
     margin-left: 0px;
     margin-right: 0px;
@@ -70,7 +69,6 @@ body {
   margin-top: 28px;
 }
 
-
 @media screen and (min-width: 960px) {
   /* Remove the padding we set earlier */
   .marketing,
@@ -85,7 +83,6 @@ body {
 
 @media screen and (min-width: 960px) {
   /* Remove the padding we set earlier */
- 
   .marketing,
   .footer {
     padding-right: 0;
@@ -109,7 +106,7 @@ body {
     left: 7%;
     z-index: 10;
     width: 164px;
-    height: 111px;
+    height: 105px;
     background-color: #337AB7;
     -moz-border-radius: 0em 5em 0em 5em;
     border-radius: 0em 5em 0em 5em;
@@ -117,29 +114,33 @@ body {
 
 #logo .gad-logo {
     display: block;
-    margin: 15px 0 0 7px;
+    margin: 5px 0 0 7px;
     height: 100%;
     opacity: 1;
     background: url(../images/logo-title.png) no-repeat 0 0;
 }
 
 #header-global .header-main nav{
-    padding-left: 250px;
+    /*padding-left: 250px;*/
     padding-top: 45px;
     position: absolute;
     width:100%;
     z-index: 1000;
 }
 
-#header-global .header-main nav li:active{
+#header-global .header-main nav li.active{
     color: #000;
-    background-color: #eee;
+    background-color: #337AB7 !important;
 }
 #header-global .header-main nav a {
     color: #fff;
 }
+#header-global .header-main nav a.router-link-active {
+    background: none !important;
+}
 #header-global .header-main nav a:hover {
-    color: #000;
+    /*color: #337AB7;*/
+    background: none !important;
 }
 #header-global .header-main nav>li+li {
     margin-left: 5px;
@@ -163,6 +164,19 @@ body {
     top: 39px;
     left: 0;
     z-index: 0;
+}
+.header-main .navbar-toggle {
+  margin-top: 3px;
+}
+.header-main .navbar-toggle .icon-bar {
+  border: 1px solid white;
+}
+.header-main .navbar-collapse {
+  box-shadow: none;
+}
+.header-main .navbar-collapse.in ul {
+  background: #444;
+  width: 100px;
 }
 
 /* contactus and aboutus page */

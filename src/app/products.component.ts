@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+
+declare var FB: any;
+declare var twttr: any;
 
 @Component({
     moduleId: module.id,
@@ -13,7 +16,7 @@ import { Subject } from 'rxjs/Subject';
     directives: [ROUTER_DIRECTIVES]
 })
 
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, AfterViewInit {
     fbCategories: FirebaseObjectObservable<any>;
     fbCategoriesBrands: FirebaseObjectObservable<any>;
     fbProducts: Observable<any[]>;
@@ -60,6 +63,12 @@ export class ProductsComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ngAfterViewInit() {
+        //share button
+        FB.XFBML.parse();
+        twttr.widgets.load();
     }
 
     selectDefault() {

@@ -194,6 +194,9 @@
 .productDetails .pShare {
     margin-top: 40px;
 }
+div.fb-share-button {
+    top: -5px;
+}
 .productDetails .pDetails p.pTitle {
     border-color: #ddd;
     border-style: solid;
