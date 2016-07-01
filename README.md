@@ -1,3 +1,3 @@
 # Gadgetz4u
 
-WIP
+Demo - https://gadgetz-3396f.firebaseapp.com/
