@@ -1,0 +1,7 @@
+.freepik {
+    display: none;
+}
+
+.freepik.active {
+    display: block;
+}

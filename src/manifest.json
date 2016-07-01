@@ -1,6 +1,6 @@
 {
-  "name": "gadgetz4u.in",
-  "short_name": "gadgetz4u.in",
+  "name": "Gadgetz4u India",
+  "short_name": "Gadgetz4u India",
   "icons": [{
         "src": "images/gadgetz4u.png",
         "sizes": "128x128"
@@ -15,5 +15,5 @@
         "sizes": "192x192"
       }],
   "start_url": "index.html",
-  "display": "standalone",
+  "display": "standalone"
 }

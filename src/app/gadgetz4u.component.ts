@@ -7,9 +7,6 @@ import { HowdyComponent } from './howdy.component';
 import { LoginComponent } from './login.component';
 import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
-declare var FB: any;
-declare var twttr: any;
-
 @Component({
   moduleId: module.id,
   selector: 'gadgetz4u',
@@ -51,9 +48,7 @@ export class Gadgetz4uAppComponent implements AfterViewInit {
   public constructor(public router: Router) { };
 
   ngAfterViewInit() {
-    //share button
-    FB.XFBML.parse()
-    twttr.widgets.load()
+
   }
 
   isRouteActive(path: string) {

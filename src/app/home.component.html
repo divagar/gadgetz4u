@@ -1,35 +1,65 @@
 <div class="home row">
-    <div class="polaroid-img col-md-4">
+    <!--<div class="polaroid-img col-md-4">
         <a href="javascript:void(0)">
-            <img height="400px" src="images/home.png" alt="Home" />
+            <img height="300px" src="images/home.png" alt="Home" />
         </a>
-    </div>
-
-    <div class="col-md-8">
+    </div>-->
+    <div class="col-md-12">
         <div class="jumbotron">
             <h2>Welcome</h2>
             <p class="lead">
                 to our newly redesigned website! It provides great insight about the latest gadgets and personalized information for you
                 from the world of gadgets.</p>
         </div>
-
-        <div class="row marketing">
-            <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-            </div>
-
-            <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-            </div>
+    </div>
+</div>
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="fb-page" data-href="https://www.facebook.com/gadgetz4u.in" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true"
+            data-hide-cover="true" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/gadgetz4u.in" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/gadgetz4u.in">Gadgetz4U Enterprises</a></blockquote>
         </div>
+    </div>
+</div>-->
 
+<div class="home row">
+    <div class="col-md-12">
+        <div id="owl" class="owl-carousel">
+            <a [routerLink]="['/products', { c: 'Laptops', cId: '0' }]">
+                <div class="item color1">
+                    <img src="images/laptop.png" alt="Laptop">
+                    <h3>Laptops</h3>
+                    <p>Special deals on HP Laptops</p>
+                </div>
+            </a>
+            <a [routerLink]="['/products', { c: 'Mobiles', cId: '1' }]">
+                <div class="item color2">
+                    <img src="images/mobile.png" alt="Mobile">
+                    <h3>Mobiles</h3>
+                    <p>The way you like</p>
+                </div>
+            </a>
+            <a [routerLink]="['/products', { c: 'TV', cId: '2' }]">
+                <div class="item color3">
+                    <img src="images/tv.png" alt="TV">
+                    <h3>Television</h3>
+                    <p>Save upto 40%</p>
+                </div>
+            </a>
+            <a [routerLink]="['/products', { c: 'A/C', cId: '3' }]">
+                <div class="item color4">
+                    <img src="images/ac.png" alt="AC">
+                    <h3>Air Conditioner</h3>
+                    <p>Best deals are here</p>
+                </div>
+            </a>
+            <a [routerLink]="['/products', { c: 'Accessories', cId: '5' }]">
+                <div class="item color5">
+                    <img src="images/accessories.png" alt="Accessories">
+                    <h3>Accessories</h3>
+                    <p>Great addons</p>
+                </div>
+            </a>
+        </div>
     </div>
 </div>

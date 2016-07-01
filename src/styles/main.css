@@ -69,6 +69,13 @@ body {
   margin-top: 28px;
 }
 
+@media screen and (min-width: 768px) {
+.jumbotron {
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+}
+}
+
 @media screen and (min-width: 960px) {
   /* Remove the padding we set earlier */
   .marketing,

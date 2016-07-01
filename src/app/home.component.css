@@ -1,0 +1,32 @@
+#owl a:hover{
+    text-decoration: none;
+}
+#owl .item {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    padding: 30px 0px;
+    margin: 10px;
+    color: #FFF;
+}
+#owl .item p {
+    font-size: 18px;
+    font-weight: 200;
+}
+/* color from https://color.adobe.com/Friends-and-foes-color-theme-1175537/?showPublished=true */
+.color1 {
+    background: #2F2933;
+}
+.color2 {
+    background: #01A2A6;
+}
+.color3 {
+    background: #29D9C2;
+}
+.color4 {
+    background: #BDF271;
+}
+.color5 {
+    background: #FFFF7D;
+}

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit} from '@angular/core';
+
+declare var FB: any;
+declare var twttr: any;
 
 @Component({
     moduleId: module.id,
@@ -7,6 +10,12 @@ import { Component } from '@angular/core';
     styleUrls: ['about.component.css']
 })
 
-export class AboutComponent {
+export class AboutComponent implements AfterViewInit {
+
+  ngAfterViewInit() {
+    //share button
+    FB.XFBML.parse()
+    twttr.widgets.load()
+  }
 
 }
