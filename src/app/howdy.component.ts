@@ -69,7 +69,9 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     selectCategory() {
-        this.fbCategories = this.af.database.object('/Categories');
+        var query: string = "/Categories"
+        console.log(query);
+        this.fbCategories = this.af.database.object(query);
     }
     selectBrands(index: number, name: string) {
         this.selectedCategory = name;
