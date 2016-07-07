@@ -15,7 +15,7 @@
             </button>
             <ul id="ddCategory" class="dropdown-menu">
                 <li *ngFor="let categories of fbCategories | async; let index = index">
-                    <a (click)="selectBrands(index, categories.Name)">{{categories.Name}}</a>
+                    <a (click)="getBrands(index, categories.Name)">{{categories.Name}}</a>
                 </li>
             </ul>
         </div>
@@ -28,7 +28,7 @@
             </button>
             <ul id="ddBrand" class="dropdown-menu" *ngIf="selectedCategory">
                 <li *ngFor="let brand of fbCategoriesBrands | async; let index = index">
-                    <a (click)="selectProducts(index, brand.Name)">{{brand.Name}}</a>
+                    <a (click)="getProducts(index, brand.Name)">{{brand.Name}}</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +46,7 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li *ngFor="let product of fbProducts | async">
-                    <a (click)="selectProduct(product.$key, product.Name)">{{product.Name}}</a>
+                    <a (click)="getProduct(product.$key, product.Name)">{{product.Name}}</a>
                 </li>
             </ul>
         </div>

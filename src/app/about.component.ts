@@ -4,18 +4,23 @@ declare var FB: any;
 declare var twttr: any;
 
 @Component({
-    moduleId: module.id,
-    selector: 'about',
-    templateUrl: 'about.component.html',
-    styleUrls: ['about.component.css']
+  moduleId: module.id,
+  selector: 'about',
+  templateUrl: 'about.component.html',
+  styleUrls: ['about.component.css']
 })
 
 export class AboutComponent implements AfterViewInit {
 
   ngAfterViewInit() {
-    //share button
-    FB.XFBML.parse()
-    twttr.widgets.load()
+    try {
+      //share button
+      FB.XFBML.parse()
+      twttr.widgets.load()
+    }
+    catch (e) {
+      console.log("ngAfterViewInit: error!");
+    }
   }
 
 }

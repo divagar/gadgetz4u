@@ -58,8 +58,8 @@
                 <div class="productTile row row-centered" *ngIf="!selectedProductId">
                     <div class='col-xs-12 col-sm-4 col-md-3 col-lg-2 col-centered' *ngFor="let product of fbProducts | async">
                         <a class='nostyle' [routerLink]="['/products', 
-                                                            { c: selectedCategory, 
-                                                              cId: selectedCategoryId, 
+                                                            { c: product.Categories, 
+                                                              cId: product.CategoriesId, 
                                                               b: product.Brands, 
                                                               pId: product.$key,
                                                               p: encodeURIComponent(product.Name)}]">

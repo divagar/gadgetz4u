@@ -45,7 +45,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             this.router.navigate(['/login']);
 
         //selectCategory
-        this.selectCategory();
+        this.getCategory();
     }
 
     ngOnInit() {
@@ -68,12 +68,13 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.loginUser.logoutUser();
     }
 
-    selectCategory() {
+    getCategory() {
         var query: string = "/Categories"
         console.log(query);
         this.fbCategories = this.af.database.object(query);
     }
-    selectBrands(index: number, name: string) {
+
+    getBrands(index: number, name: string) {
         this.selectedCategory = name;
         this.selectedCategoryId = index;
         this.selectedBrand = null;
@@ -87,7 +88,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.fbCategoriesBrands = this.af.database.object(query);
     }
 
-    selectProducts(index: number, pBrand: string) {
+    getProducts(index: number, pBrand: string) {
         this.selectedBrand = pBrand;
         this.selectedBrandId = index;
         this.selectedProduct = null;
@@ -108,7 +109,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         });
     }
 
-    selectProduct(index: number, name: string) {
+    getProduct(index: number, name: string) {
         this.selectedProduct = name;
         this.selectedProductId = index;
         this.addNewProduct = false;
@@ -152,6 +153,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             'Categories': this.selectedCategory,
             'Brands': this.selectedBrand,
             'Categories_Brands': this.selectedCategory + "_" + this.selectedBrand,
+            'CategoriesId': this.selectedCategoryId,
             'Name': name,
             'Description': desc,
             'ImageLink': imgUrl,

@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 
 declare var FB: any;
 declare var twttr: any;
+declare var jQuery: any;
 
 @Component({
     moduleId: module.id,
@@ -38,27 +39,31 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         public params: RouteSegment,
         public sanitizer: DomSanitizationService) {
 
-        //selectCategory
-        this.selectCategory();
+        try {
+            //Route params
+            this.selectedCategory = params.getParam('c');
+            this.selectedCategoryId = Number(params.getParam('cId'));
+            this.selectedBrand = params.getParam('b');
+            this.selectedProduct = params.getParam('p');
+            this.selectedProductId = params.getParam('pId');
 
-        //Route params
-        //Brands
-        var pCat = params.getParam('c');
-        var pCatId: number = Number(params.getParam('cId'));
-        if (pCat != undefined && pCatId != undefined) {
-            this.selectBrands(pCatId, pCat)
+            //Get categories
+            this.getCategories();
+
+            //Get Brands
+            if (this.selectedCategory != undefined && this.selectedCategoryId != undefined)
+                this.getBrands();
+
+            //Get Product Details
+            if (this.selectedProduct != undefined && this.selectedProductId != undefined)
+                this.getProductDetails();
+            //Get Products
+            else if (this.selectedCategory != undefined && this.selectedBrand != undefined)
+                this.getProducts();
         }
-        //Products
-        var pCat = params.getParam('c');
-        var pBrand = params.getParam('b');
-        if (pCat != undefined && pBrand != undefined) {
-            this.selectProducts(pCat, pBrand);
-        }
-        //Product Details
-        var pProduct = params.getParam('p');
-        var pProductId = params.getParam('pId');
-        if (pProduct != undefined && pProductId != undefined) {
-            this.selectProductDetails(pProductId, pProduct);
+        catch (e) {
+            console.log("products constructor: error - " + e);
+            this.router.navigate(['/products']);
         }
     }
 
@@ -66,9 +71,21 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        //share button
-        FB.XFBML.parse();
-        twttr.widgets.load();
+        try {
+            //share button
+            FB.XFBML.parse();
+            twttr.widgets.load();
+
+            //click event for navbar
+            jQuery(document).on('click', '.navbar-collapse.in', function (e) {
+                if (jQuery(e.target).is('a') && jQuery(e.target).attr('class') != 'dropdown-toggle') {
+                    jQuery(this).collapse('hide');
+                }
+            });
+        }
+        catch (e) {
+            console.log("ngAfterViewInit: error - " + e);
+        }
     }
 
     selectDefault() {
@@ -80,63 +97,68 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/products']);
     }
 
-    selectCategory() {
+    getCategories() {
         var query: string = '/Categories';
         console.log(query);
         this.fbCategories = this.af.database.object(query);
+
+        //product listing
+        if (this.selectedCategory == undefined)
+            this.getProductListing("Categories", undefined);
     }
 
-    selectBrands(index: number, pCat: string) {
-        this.selectedCategory = pCat;
-        this.selectedCategoryId = index;
-        this.selectedBrand = null;
-        this.selectedProduct = null;
-        this.selectedProductId = null;
-
+    getBrands() {
+        //Brand listing
         var query: string = '/Categories/' + this.selectedCategoryId + '/Brands';
         console.log(query);
         this.fbCategoriesBrands = this.af.database.object(query);
 
-        var query: string = '/Products/';
-        console.log(query);
-        this.fbProducts = this.af.database.list(query, {
-            query: {
-                orderByChild: "Categories",
-                equalTo: pCat
-            }
-        }).map((_products) => {
-            return _products.map((_product) => {
-                return _product;
-            })
-        });
+        //product listing
+        if (this.selectedBrand == undefined)
+            this.getProductListing("Categories", this.selectedCategory);
     }
 
-    selectProducts(pCat: string, pBrand: string) {
-        this.selectedBrand = pBrand;
+    getProducts() {
         this.selectedProduct = null;
         this.selectedProductId = null;
 
-        var query: string = '/Products/';
-        console.log(query);
-        this.fbProducts = this.af.database.list(query, {
-            query: {
-                orderByChild: "Categories_Brands",
-                equalTo: this.selectedCategory + '_' + pBrand
-            }
-        }).map((_products) => {
-            return _products.map((_product) => {
-                return _product;
-            })
-        });
+        //product listing
+        this.getProductListing("Categories_Brands", this.selectedCategory + '_' + this.selectedBrand);
     }
 
-    selectProductDetails(id: string, name: string) {
-        this.selectedProduct = decodeURIComponent(name);
-        this.selectedProductId = id;
-
-        var query: string = '/Products/' + id;
+    getProductDetails() {
+        //product detail listing
+        var query: string = '/Products/' + this.selectedProductId;
         console.log(query);
         this.fbProductDetails = this.af.database.object(query);
+    }
+
+    getProductListing(orderby: string, equalto: string) {
+        var queryUrl: string = '/Products/';
+        console.log(queryUrl);
+        console.log("orderby = " + orderby + " equalto = " + equalto);
+
+        var fbQuery;
+        if (equalto != undefined) {
+            fbQuery = {
+                orderByChild: orderby,
+                equalTo: equalto
+            };
+        }
+        else {
+            fbQuery = {
+                orderByChild: orderby
+            };
+        }
+
+        this.fbProducts = this.af.database.list(queryUrl, { query: fbQuery })
+            .map((_products) => {
+                if (_products.length == 0)
+                    return _products;
+                return _products.map((_product) => {
+                    return _product;
+                })
+            });
     }
 
     calcPer(price: string, mrp: string) {
@@ -145,7 +167,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             var iMrp: string = mrp.replace(/\D/g, '');
             var iPer: number = 100 - (parseInt(iPrice) / parseInt(iMrp) * 100);
             iPer = Math.floor(iPer);
-            if (iPer != 0)
+            if (iPer > 0)
                 return ("Save " + iPer + " %");
         }
     }
