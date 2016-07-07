@@ -44,8 +44,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             this.selectedCategory = params.getParam('c');
             this.selectedCategoryId = Number(params.getParam('cId'));
             this.selectedBrand = params.getParam('b');
-            this.selectedProduct = decodeURIComponent(params.getParam('p'));
             this.selectedProductId = params.getParam('pId');
+            if (params.getParam('p') != undefined)
+                this.selectedProduct = decodeURIComponent(params.getParam('p'));
 
             //Get categories
             this.getCategories();
@@ -154,11 +155,20 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.fbProducts = this.af.database.list(queryUrl, { query: fbQuery })
             .map((_products) => {
                 if (_products.length == 0)
-                    return _products;
-                return _products.map((_product) => {
-                    return _product;
-                })
+                    return undefined;
+                else {
+                    return _products.map((_product) => {
+                        return _product;
+                    })
+                }
             });
+
+        // this.fbProducts.subscribe(                      
+        //     function(x) {
+        //         if(x == undefined)
+        //             console.log("No product to display.");  
+        //     }
+        // );
     }
 
     calcPer(price: string, mrp: string) {

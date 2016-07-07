@@ -37,7 +37,7 @@
                         <a *ngIf="selectedBrand" [routerLink]="['/products', { c: selectedCategory, cId: selectedCategoryId, b: selectedBrand }]">
                             {{selectedBrand}}
                         </a>
-                        <span class="selectedProduct">
+                        <span *ngIf="selectedProduct" class="selectedProduct">
                             {{selectedProduct}}
                         </span>
                     </div>
