@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             this.selectedCategory = params.getParam('c');
             this.selectedCategoryId = Number(params.getParam('cId'));
             this.selectedBrand = params.getParam('b');
-            this.selectedProduct = params.getParam('p');
+            this.selectedProduct = decodeURIComponent(params.getParam('p'));
             this.selectedProductId = params.getParam('pId');
 
             //Get categories
