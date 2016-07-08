@@ -1,32 +1,32 @@
 <div class="container-fluid">
   <div id="header-global">
     <a [routerLink]="['/']" id="logo">
-      <<span class="gad-logo"></span>
+      <span class="gad-logo"></span>
     </a>
     <div class="head header-main">
       <nav class="navbar">
         <div class="container-fluid">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
         </button>
-        <div class="collapse navbar-collapse" id="myNav">
-        <ul class="nav navbar-nav pull-right">
-          <li [class.active]="isRouteActive('home')">
-            <a [routerLink]="['/home']" id="home">Home</a>
-          </li>
-          <li [class.active]="isRouteActive('products')">
-            <a [routerLink]="['/products']" id="products">Products</a>
-          </li>
-          <li [class.active]="isRouteActive('about')">
-            <a [routerLink]="['/about']" id="about">About</a>
-          </li>
-          <li [class.active]="isRouteActive('contact')">
-            <a [routerLink]="['/contact']" id="contact">Contact</a>
-          </li>
-        </ul>
-        </div>
+          <div class="collapse navbar-collapse" id="myNav">
+            <ul class="nav navbar-nav pull-right">
+              <li [class.active]="isRouteActive('home')">
+                <a [routerLink]="['/home']" id="home">Home</a>
+              </li>
+              <li [class.active]="isRouteActive('products')">
+                <a [routerLink]="['/products']" id="products">Products</a>
+              </li>
+              <li [class.active]="isRouteActive('about')">
+                <a [routerLink]="['/about']" id="about">About</a>
+              </li>
+              <li [class.active]="isRouteActive('contact')">
+                <a [routerLink]="['/contact']" id="contact">Contact</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
@@ -38,7 +38,7 @@
 
   <footer class="footer">
     <p>&copy; 2016 Gadgetz4u India Pvt. Ltd.</p>
-    <div class="freepik" [class.active]="isRouteActive('home')">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <div class="freepik" [class.active]="isRouteActive('home')">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>      is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
   </footer>
 </div>
 <!-- /container -->
