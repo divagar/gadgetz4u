@@ -182,6 +182,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         }
     }
 
+    isCategoryActive(category: string) {
+        let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
+        let parameters = currentRoute == null ? null : currentRoute.parameters['c'];
+        return parameters == category;
+    }
     isBrandActive(brand: string) {
         let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
         let parameters = currentRoute == null ? null : currentRoute.parameters['b'];

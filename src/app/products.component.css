@@ -1,28 +1,25 @@
 .mmBar {
-    margin-top: 10px;
-    /*border-color: #ddd;
+    border-color: #ddd;
     border-style: solid;
     border-width: 0px;
-    border-right-width: 1px;
-    box-shadow: none;*/
-    padding: 5px 5px;
-    /*float: left;*/
+    border-bottom-width: 1px;
+    box-shadow: none;
+    padding-bottom: 5px;
 }
-
-/*.mmBarRoute {
-    padding: 10px 10px;
-    padding-left: 17px;
-}
-.mmBarRoute a:hover {
-    text-decoration: none;
-}
-.mmBarRoute .selectedCategory {
-    color: #aaa;
-}
-.mmBarRoute .selectedCategory::before{
-    color: #aaa;
-    content: ' > ';
+/*.mmBar button {
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+    color: black;
 }*/
+.mmBar button {
+    background-color: #337AB7;
+    border-style: solid;
+    border-left-width: 1px;
+    border-color: #eee;
+    color: white;
+}
 
 .mmBar li {
     list-style-type: none;

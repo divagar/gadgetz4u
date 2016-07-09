@@ -5,16 +5,16 @@
             <!-- category btn -->
             <!--<span>Category &nbsp; &nbsp;</span>-->
             <div class="btn-group">
-                <button type="button" class="btn btn-primary" *ngIf="!selectedCategory">Category : All</button>
-                <button type="button" class="btn btn-primary" *ngIf="selectedCategory">Category : {{selectedCategory}}</button>
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn" *ngIf="!selectedCategory">Category : All</button>
+                <button type="button" class="btn" *ngIf="selectedCategory">Category : {{selectedCategory}}</button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu" *ngIf="fbCategories">
                     <li><a (click)="selectDefault()" *ngIf="selectedCategory">All</a></li>
                     <li role="separator" class="divider" *ngIf="selectedCategory"></li>
-                    <li *ngFor="let categories of fbCategories | async; let index = index">
+                    <li *ngFor="let categories of fbCategories | async; let index = index" [class.active]="isCategoryActive(categories.Name)">
                         <a class="mmLink" [routerLink]="['/products', { c: categories.Name, cId: index }]">
                             {{categories.Name}}
                         </a>
@@ -24,9 +24,9 @@
             <!-- Brand btn -->
             <!--<span *ngIf="selectedCategory">&nbsp; &nbsp; Brand &nbsp; &nbsp;</span>-->
             <div class="btn-group" *ngIf="selectedCategory">
-                <button type="button" class="btn btn-success" *ngIf="!selectedBrand">Brand : All</button>
-                <button type="button" class="btn btn-success" *ngIf="selectedBrand">Brand : {{selectedBrand}}</button>
-                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn" *ngIf="!selectedBrand">Brand : All</button>
+                <button type="button" class="btn" *ngIf="selectedBrand">Brand : {{selectedBrand}}</button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
@@ -44,24 +44,6 @@
     <div *ngIf="fbCategories != null" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pDetailsPane">
             <router-outlet>
-                <!-- product nav - starts -->
-                <!--<div class="row">
-                    <div class="col-md-12 pNav">
-                        <a (click)="selectDefault()" *ngIf="selectedCategory">
-                            All
-                        </a>
-                        <a *ngIf="selectedCategory" [routerLink]="['/products', { c: selectedCategory, cId: selectedCategoryId }]">
-                            {{selectedCategory}}
-                        </a>
-                        <a *ngIf="selectedBrand" [routerLink]="['/products', { c: selectedCategory, cId: selectedCategoryId, b: selectedBrand }]">
-                            {{selectedBrand}}
-                        </a>
-                        <span *ngIf="selectedProduct" class="selectedProduct">
-                            {{selectedProduct}}
-                        </span>
-                    </div>
-                </div>-->
-                <!-- product nav - ends -->
 
                 <!-- alert start -->
                 <div class="row row-centered" *ngIf="productAlert">
