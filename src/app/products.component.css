@@ -6,13 +6,6 @@
     box-shadow: none;
     padding-bottom: 5px;
 }
-/*.mmBar button {
-    background-color: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #eee;
-    color: black;
-}*/
 .mmBar button {
     /*background-color: #337AB7;
     border-style: solid;
@@ -21,7 +14,6 @@
     background-color: white;
     color: black;
 }
-
 .mmBar li {
     list-style-type: none;
 }
@@ -29,8 +21,20 @@
     text-decoration: none;
 }
 
+/* product query - starts */
+.productQueryLoading {
+    background-image: url(images/loading.gif); 
+    height: 100px; 
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.productQueryEmpty {
+    font-size: 15px;
+    text-align: center;
+}
+/* product query - ends */
 /* product tile - starts*/
-
 .productTile.row {
   margin-top: 10px;
   margin-bottom: 0;

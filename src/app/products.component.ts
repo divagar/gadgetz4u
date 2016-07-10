@@ -32,6 +32,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     productAlertMsg: string;
     productAlertType: string;
 
+    productQueryStatus: any
+
     constructor(
         public af: AngularFire,
         public router: Router,
@@ -156,12 +158,25 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                 }
             });
 
-        // this.fbProducts.subscribe(                      
-        //     function(x) {
-        //         if(x == undefined)
-        //             console.log("No product to display.");  
-        //     }
-        // );
+        // Product Query status
+        this.productQueryStatus = "Loading";
+        this.fbProducts.subscribe(
+            x => {
+                console.log('Next: %s', x);
+                if (x == undefined)
+                    this.productQueryStatus = "Empty";
+                else
+                    this.productQueryStatus = "Data";
+            },
+            e => {
+                console.log('Error: %s', e);
+                this.productQueryStatus = "Error";
+            },
+            () => {
+                console.log('Completed');
+                this.productQueryStatus = "Loading";
+            }
+        );
     }
 
     calcPer(price: string, mrp: string) {
