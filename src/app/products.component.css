@@ -14,11 +14,12 @@
     color: black;
 }*/
 .mmBar button {
-    background-color: #337AB7;
+    /*background-color: #337AB7;
     border-style: solid;
     border-left-width: 1px;
-    border-color: #eee;
-    color: white;
+    border-color: #eee;*/
+    background-color: white;
+    color: black;
 }
 
 .mmBar li {
@@ -113,19 +114,6 @@
     margin-top: 10px;
     padding: 10px 10px;
 }
-/*.pDetailsPane .pNav {
-    padding: 10px 10px;
-}
-.pDetailsPane .pNav a:hover {
-    text-decoration: none;
-}
-.pDetailsPane .pNav a::after {
-    color: #aaa;
-    content: ' > ';
-}
-.pDetailsPane .pNav .selectedProduct {
-    color: #aaa;
-}*/
 
 .productDetails {
     margin-top: 10px;
@@ -163,7 +151,7 @@
     padding: 5px 5px;
 }
 .productDetails .pShare {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 div.fb-share-button {
     top: -5px;

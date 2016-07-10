@@ -3,13 +3,12 @@
     <div *ngIf="fbCategories != null" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mmBar">
             <!-- category btn -->
-            <!--<span>Category &nbsp; &nbsp;</span>-->
             <div class="btn-group">
-                <button type="button" class="btn" *ngIf="!selectedCategory">Category : All</button>
-                <button type="button" class="btn" *ngIf="selectedCategory">Category : {{selectedCategory}}</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="!selectedCategory">
+                   Category : All &nbsp; &nbsp; <span class="caret"></span>
+                </button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="selectedCategory">
+                   Category : {{selectedCategory}} &nbsp; &nbsp; <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" *ngIf="fbCategories">
                     <li><a (click)="selectDefault()" *ngIf="selectedCategory">All</a></li>
@@ -22,13 +21,12 @@
                 </ul>
             </div>
             <!-- Brand btn -->
-            <!--<span *ngIf="selectedCategory">&nbsp; &nbsp; Brand &nbsp; &nbsp;</span>-->
             <div class="btn-group" *ngIf="selectedCategory">
-                <button type="button" class="btn" *ngIf="!selectedBrand">Brand : All</button>
-                <button type="button" class="btn" *ngIf="selectedBrand">Brand : {{selectedBrand}}</button>
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="!selectedBrand">
+                    Brand : All &nbsp; &nbsp; <span class="caret"></span>
+                </button>
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="selectedBrand">
+                    Brand : {{selectedBrand}} &nbsp; &nbsp;  <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" *ngIf="fbCategoriesBrands">
                     <li *ngFor="let brand of fbCategoriesBrands | async; let index = index" [class.active]="isBrandActive(brand.Name)">
@@ -62,8 +60,7 @@
                                                             { c: product.Categories, 
                                                               cId: product.CategoriesId, 
                                                               b: product.Brands, 
-                                                              pId: product.$key,
-                                                              p: encodeURIComponent(product.Name)}]">
+                                                              pId: product.$key}]">
                             <div class='pHeader'>
                                 <h3>{{product.Name}}</h3>
                                 <h6>{{product.Description}}</h6>

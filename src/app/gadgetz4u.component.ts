@@ -7,6 +7,8 @@ import { HowdyComponent } from './howdy.component';
 import { LoginComponent } from './login.component';
 import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
+declare var jQuery: any;
+
 @Component({
   moduleId: module.id,
   selector: 'gadgetz4u',
@@ -48,7 +50,17 @@ export class Gadgetz4uAppComponent implements AfterViewInit {
   public constructor(public router: Router) { };
 
   ngAfterViewInit() {
-
+    try {
+      //click event for navbar
+      jQuery(document).on('click', '.navbar-collapse.in', function (e) {
+        if (jQuery(e.target).is('a') && jQuery(e.target).attr('class') != 'dropdown-toggle') {
+          jQuery(this).collapse('hide');
+        }
+      });
+    }
+    catch (e) {
+      console.log("Gadget4u ngAfterViewInit: error - " + e);
+    }
   }
 
   isRouteActive(path: string) {

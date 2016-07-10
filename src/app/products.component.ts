@@ -7,7 +7,6 @@ import { Subject } from 'rxjs/Subject';
 
 declare var FB: any;
 declare var twttr: any;
-declare var jQuery: any;
 
 @Component({
     moduleId: module.id,
@@ -45,8 +44,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             this.selectedCategoryId = Number(params.getParam('cId'));
             this.selectedBrand = params.getParam('b');
             this.selectedProductId = params.getParam('pId');
-            if (params.getParam('p') != undefined)
-                this.selectedProduct = decodeURIComponent(params.getParam('p'));
+            // if (params.getParam('p') != undefined)
+            //     this.selectedProduct = decodeURIComponent(params.getParam('p'));
 
             //Get categories
             this.getCategories();
@@ -56,7 +55,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                 this.getBrands();
 
             //Get Product Details
-            if (this.selectedProduct != undefined && this.selectedProductId != undefined)
+            //if (this.selectedProduct != undefined && this.selectedProductId != undefined)
+            if (this.selectedProductId != undefined)
                 this.getProductDetails();
             //Get Products
             else if (this.selectedCategory != undefined && this.selectedBrand != undefined)
@@ -76,16 +76,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             //share button
             FB.XFBML.parse();
             twttr.widgets.load();
-
-            //click event for navbar
-            jQuery(document).on('click', '.navbar-collapse.in', function (e) {
-                if (jQuery(e.target).is('a') && jQuery(e.target).attr('class') != 'dropdown-toggle') {
-                    jQuery(this).collapse('hide');
-                }
-            });
         }
         catch (e) {
-            console.log("ngAfterViewInit: error - " + e);
+            console.log("Product ngAfterViewInit: error - " + e);
         }
     }
 

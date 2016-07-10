@@ -112,7 +112,7 @@ body {
     position: absolute;
     top: 0;
     left: 7%;
-    z-index: 10;
+    z-index: 100;
     width: 164px;
     height: 105px;
     background-color: #337AB7;
@@ -122,10 +122,11 @@ body {
 
 #logo .gad-logo {
     display: block;
-    margin: 21px 0 0 7px;
-    height: 100%;
+    margin: 24px 0 0 7px;
+    height: 60%;
     opacity: 1;
     background: url(../images/logo-title.png) no-repeat 0 0;
+    z-index: 100;
 }
 
 #header-global .header-main nav{
@@ -133,7 +134,7 @@ body {
     padding-top: 45px;
     position: absolute;
     width:100%;
-    z-index: 1000;
+    z-index: 10;
 }
 
 #header-global .header-main nav li.active{
@@ -182,9 +183,15 @@ body {
 .header-main .navbar-collapse {
   box-shadow: none;
 }
+.header-main .navbar-collapse.in {
+  overflow-y: inherit;
+}
 .header-main .navbar-collapse.in ul {
   background: #444;
   width: 100px;
+  z-index: 1000;
+  margin-top: 30px;
+  margin-right: -35px;
 }
 
 /* contactus and aboutus page */
