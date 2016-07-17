@@ -11,6 +11,7 @@ import {
   FirebaseApp} from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   moduleId: module.id,
@@ -29,10 +30,16 @@ export class LoginComponent {
 
   constructor(
     public af: AngularFire,
-    public router: Router) {
+    public router: Router,
+    private titleService: Title) {
+
+    //Set page title
+    this.titleService.setTitle("Gadgetz4u India | Login");
+
+    //get af auth status
     af.auth
-          .do(v => this.userCredentials(v))
-          .subscribe(user => this.userCredentials(user))
+      .do(v => this.userCredentials(v))
+      .subscribe(user => this.userCredentials(user))
   }
 
   /* login user */

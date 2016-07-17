@@ -1,4 +1,5 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
+import { Title } from '@angular/platform-browser';
 import { enableProdMode } from '@angular/core';
 import { Gadgetz4uAppComponent, environment } from './app/';
 import { FIREBASE_PROVIDERS, defaultFirebase, AngularFire } from 'angularfire2';
@@ -8,6 +9,7 @@ if (environment.production) {
 }
 
 bootstrap(Gadgetz4uAppComponent,[
+  Title,
   FIREBASE_PROVIDERS,
   defaultFirebase({
     apiKey: "AIzaSyAhazzDCJPH0ADelG3bZ_HJyy8PMKlmfiY",

@@ -95,6 +95,11 @@
                         <div class="row">
                             <div class="col-md-12 pName">
                                 <h2>{{ (fbProductDetails | async)?.Name }}</h2>
+                                    {{updatePageTileWithProductInfo(
+                                                    (fbProductDetails | async)?.Name,
+                                                    (fbProductDetails | async)?.Price,
+                                                    (fbProductDetails | async)?.MRP
+                                                    )}}
                             </div>
                         </div>
                         <div class="row">
@@ -120,9 +125,7 @@
                                     <a class="fb-xfbml-parse-ignore" target="_blank">Share</a>
                                 </div>
                                 <!-- twitter share -->
-
                                 <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this deal." data-via="gadgetz4u.in">Tweet</a>
-
                             </div>
                         </div>
                     </div>

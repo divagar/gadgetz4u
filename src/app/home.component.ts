@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
@@ -12,6 +13,10 @@ declare var jQuery: any;
 })
 
 export class HomeComponent implements AfterViewInit {
+    public constructor(private titleService: Title) {
+        //Set page title
+        this.titleService.setTitle("Gadgetz4u India | Home");
+    }
 
     ngAfterViewInit() {
         jQuery("#owl").owlCarousel({

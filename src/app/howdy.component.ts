@@ -3,6 +3,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
+import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
 declare var tinymce: any;
@@ -37,15 +38,17 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     howdyAlertType: string;
 
     constructor(public af: AngularFire,
-                public loginUser: LoginComponent,
-                public router: Router) {
+        public loginUser: LoginComponent,
+        public router: Router,
+        private titleService: Title) {
 
-        //check user credentials
-        if(this.loginUser.user == null)
-            this.router.navigate(['/login']);
+        //Set page title
+        this.titleService.setTitle("Gadgetz4u India | Dashboard");
 
-        //selectCategory
-        this.getCategory();
+        //get af auth status
+        af.auth
+            .do(v => this.howdyLogin(v))
+            .subscribe(user => this.howdyLogin(user))
     }
 
     ngOnInit() {
@@ -62,6 +65,16 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             jQuery("#btnBrand.btn:first-child").text(jQuery(this).text());
             jQuery("#btnBrand.btn:first-child").val(jQuery(this).text());
         });*/
+    }
+
+    howdyLogin(user) {
+        //check user credentials
+        this.loginUser.userCredentials(user);
+        if (this.loginUser.user == null)
+            this.router.navigate(['/login']);
+        else
+            //selectCategory
+            this.getCategory();
     }
 
     howdyLogout() {
@@ -141,7 +154,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     tinyMCESetContent(content) {
-        console.log("content = " + content);
+        //console.log("content = " + content);
         tinymce.activeEditor.setContent(content);
         clearTimeout(this.timerTiny);
     }
@@ -161,16 +174,16 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             'MRP': mrp,
             'Price': price
         }
-        console.log(data);
-        console.log(details);
+        //console.log(data);
+        //console.log(details);
         var query: string = '/Products';
         console.log(query);
-        this.howdyalert('info','Processing.', true);
+        this.howdyalert('info', 'Processing.', true);
         this.fbNewProduct = this.af.database.list(query);
         const promise = this.fbNewProduct.push(data);
         promise
-            .then(_ => this.howdyalert('success','New product added successfully.', true))
-            .catch(err => this.howdyalert('warning','Error occurred while addding product.', true));
+            .then(_ => this.howdyalert('success', 'New product added successfully.', true))
+            .catch(err => this.howdyalert('warning', 'Error occurred while addding product.', true));
     }
 
     updateProduct(name: string, desc: string, imgUrl: string, details: string, mrp: string, price: string) {
@@ -184,19 +197,19 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             'MRP': mrp,
             'Price': price
         }
-        this.howdyalert('info','Processing.', true);
+        this.howdyalert('info', 'Processing.', true);
         const promise = this.fbProductDetails.update(data);
         promise
             .then(_ => this.howdyalert('success', 'Product updated successfully.', true))
-            .catch(err => this.howdyalert('warning','Error occurred while update.', true));
+            .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
     }
 
     deleteProduct() {
-        this.howdyalert('info','Processing.', true);
+        this.howdyalert('info', 'Processing.', true);
         const promise = this.fbProductDetails.remove();
         promise
             .then(_ => this.howdyalert('success', 'Product deleted successfully.', true))
-            .catch(err => this.howdyalert('warning','Error occurred while delete.', true));
+            .catch(err => this.howdyalert('warning', 'Error occurred while delete.', true));
     }
 
     howdyalert(type, msg, status) {

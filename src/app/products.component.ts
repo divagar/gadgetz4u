@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Title } from '@angular/platform-browser';
 
 declare var FB: any;
 declare var twttr: any;
@@ -38,7 +39,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         public af: AngularFire,
         public router: Router,
         public params: RouteSegment,
-        public sanitizer: DomSanitizationService) {
+        public sanitizer: DomSanitizationService,
+        private titleService: Title) {
+
+        //Set page title
+        this.titleService.setTitle("Gadgetz4u India | Products");
 
         try {
             //Route params
@@ -177,6 +182,19 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                 this.productQueryStatus = "Loading";
             }
         );
+    }
+
+    updatePageTileWithProductInfo(pName: string, pPrice: string, pMrp: string) {
+        //title
+        var title: string = "Gadgetz4u India | " + pName;
+        //get saving
+        var save: string = this.calcPer(pPrice, pMrp);
+        if (save != null) {
+            title += " | " + save;
+        }
+        //Set page title
+        if (pName != null)
+            this.titleService.setTitle(title);
     }
 
     calcPer(price: string, mrp: string) {

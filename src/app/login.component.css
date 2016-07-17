@@ -1,5 +1,7 @@
+@media (min-width: 768px) {
 .login {
   width: 40%;
+}
 }
 
 .btn {

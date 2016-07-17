@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     moduleId: module.id,
@@ -8,5 +9,8 @@ import { Component} from '@angular/core';
 })
 
 export class ContactComponent {
-
+    public constructor(private titleService: Title) {
+        //Set page title
+        this.titleService.setTitle("Gadgetz4u India | Contact Us");
+    }
 }

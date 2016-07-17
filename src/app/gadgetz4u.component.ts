@@ -42,6 +42,9 @@ declare var jQuery: any;
   },
   {
     path: '/', component: HomeComponent
+  },
+  {
+    path: '/*', component: HomeComponent
   }
 ])
 
