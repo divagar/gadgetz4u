@@ -5,6 +5,7 @@ import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Title } from '@angular/platform-browser';
+import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 declare var FB: any;
 declare var twttr: any;
@@ -40,7 +41,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         public router: Router,
         public params: RouteSegment,
         public sanitizer: DomSanitizationService,
-        private titleService: Title) {
+        public titleService: Title) {
 
         //Set page title
         this.titleService.setTitle("Gadgetz4u India | Products");
@@ -195,6 +196,23 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         //Set page title
         if (pName != null)
             this.titleService.setTitle(title);
+    }
+
+    CreateMetaElement(property: string, content: string) {
+        //:HTMLElement {
+        let el: HTMLElement;
+        let DOM = getDOM();
+        let headElement = DOM.query('head');
+        let query = 'meta[property="'+ property + '"]';
+
+        el = DOM.query(query);
+        if (el === null && content != null) {
+            el = DOM.createElement('meta');
+            el.setAttribute('property', property);
+            el.setAttribute('content', content);
+            headElement.appendChild(el);
+        }
+        //return el;
     }
 
     calcPer(price: string, mrp: string) {

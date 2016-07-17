@@ -95,11 +95,16 @@
                         <div class="row">
                             <div class="col-md-12 pName">
                                 <h2>{{ (fbProductDetails | async)?.Name }}</h2>
+                                    <!-- Page title -->
                                     {{updatePageTileWithProductInfo(
                                                     (fbProductDetails | async)?.Name,
                                                     (fbProductDetails | async)?.Price,
                                                     (fbProductDetails | async)?.MRP
                                                     )}}
+                                    <!-- Page meta -->
+                                    {{ CreateMetaElement('og:title', (fbProductDetails | async)?.Name) }}
+                                    {{ CreateMetaElement('og:description', 'Checkout this deal!') }}
+                                    {{ CreateMetaElement('og:image',(fbProductDetails | async)?.ImageLink) }}
                             </div>
                         </div>
                         <div class="row">
