@@ -83,7 +83,7 @@
 
 .productTile .pHeader h6 {
   text-align: center;
-  font-style: italic;
+  color: #aaa;
 }
 
 .productTile .pContent img {

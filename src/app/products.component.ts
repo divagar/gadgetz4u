@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         public titleService: Title) {
 
         //Set page title
-        this.titleService.setTitle("Gadgetz4u India | Products");
+        this.titleService.setTitle("Gadgetz4u India | Gadgetz");
 
         try {
             //Route params
