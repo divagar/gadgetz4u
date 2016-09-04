@@ -72,8 +72,23 @@
                 </div>
                 <br/>
                 <div class="input-group">
-                    <span class="input-group-addon">Image Link</span>
+                    <span class="input-group-addon">Image Link #1</span>
                     <input type="text" class="form-control" #pImgLink value="{{ (fbProductDetails | async)?.ImageLink }}">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <span class="input-group-addon">Image Link #2</span>
+                    <input type="text" class="form-control" #pImgLink1 value="{{ (fbProductDetails | async)?.ImageLink1 }}">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <span class="input-group-addon">Image Link #3</span>
+                    <input type="text" class="form-control" #pImgLink2 value="{{ (fbProductDetails | async)?.ImageLink2 }}">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <span class="input-group-addon">Image Link #4</span>
+                    <input type="text" class="form-control" #pImgLink3 value="{{ (fbProductDetails | async)?.ImageLink3 }}">
                 </div>
                 <br/>
                 <div class="input-group">
@@ -93,10 +108,12 @@
                     <input type="text" class="form-control" #pPrice value="{{ (fbProductDetails | async)?.Price }}">
                 </div>
                 <br/>
-                <button *ngIf="addNewProduct" type="submit" class="btn btn-primary" (click)="addProduct(pName.value, pDesc.value, pImgLink.value, pDetails.value, pMRP.value, pPrice.value)">
+                <button *ngIf="addNewProduct" type="submit" class="btn btn-primary" 
+                (click)="addProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
                     Add Product
                 </button>
-                <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" (click)="updateProduct(pName.value, pDesc.value, pImgLink.value, pDetails.value, pMRP.value, pPrice.value)">
+                <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" 
+                (click)="updateProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
                     Update
                 </button>
                 <button *ngIf="selectedProduct" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal">

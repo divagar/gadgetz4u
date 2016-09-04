@@ -9,6 +9,7 @@ import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 declare var FB: any;
 declare var twttr: any;
+declare var jQuery: any;
 
 @Component({
     moduleId: module.id,
@@ -84,6 +85,14 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             //share button
             FB.XFBML.parse();
             twttr.widgets.load();
+            //owl
+            jQuery("#owl").owlCarousel({
+                // Most important owl features
+                singleItem:true,
+                //Autoplay
+                autoPlay: false,
+                stopOnHover: true,
+            });
         }
         catch (e) {
             console.log("Product ngAfterViewInit: error - " + e);
@@ -203,7 +212,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         let el: HTMLElement;
         let DOM = getDOM();
         let headElement = DOM.query('head');
-        let query = 'meta[property="'+ property + '"]';
+        let query = 'meta[property="' + property + '"]';
 
         el = DOM.query(query);
         if (el === null && content != null) {

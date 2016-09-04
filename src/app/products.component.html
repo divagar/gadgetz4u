@@ -88,23 +88,30 @@
 
                 <!-- product details dynamic content start -->
                 <div class="productDetails row row-centered" *ngIf="fbProductDetails">
-                    <div class="col-md-4 pImage">
-                        <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="image-responsive" />
+                    <div id="owl" class="col-md-4 owl-carousel">
+                        <div class="pImage">
+                            <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="image-responsive" />
+                        </div>
+                        <div class="pImage">
+                            <img src="{{ (fbProductDetails | async)?.ImageLink1 }}" class="image-responsive" />
+                        </div>
+                        <div class="pImage">
+                            <img src="{{ (fbProductDetails | async)?.ImageLink2 }}" class="image-responsive" />
+                        </div>
+                        <div class="pImage">
+                            <img src="{{ (fbProductDetails | async)?.ImageLink3 }}" class="image-responsive" />
+                        </div>
                     </div>
                     <div class="col-md-8 pDetails">
                         <div class="row">
                             <div class="col-md-12 pName">
                                 <h2>{{ (fbProductDetails | async)?.Name }}</h2>
-                                    <!-- Page title -->
-                                    {{updatePageTileWithProductInfo(
-                                                    (fbProductDetails | async)?.Name,
-                                                    (fbProductDetails | async)?.Price,
-                                                    (fbProductDetails | async)?.MRP
-                                                    )}}
-                                    <!-- Page meta -->
-                                    {{ CreateMetaElement('og:title', (fbProductDetails | async)?.Name) }}
-                                    {{ CreateMetaElement('og:description', 'Checkout this deal!') }}
-                                    {{ CreateMetaElement('og:image',(fbProductDetails | async)?.ImageLink) }}
+                                <!-- Page title -->
+                                {{updatePageTileWithProductInfo( (fbProductDetails | async)?.Name, (fbProductDetails | async)?.Price, (fbProductDetails |
+                                async)?.MRP )}}
+                                <!-- Page meta -->
+                                {{ CreateMetaElement('og:title', (fbProductDetails | async)?.Name) }} {{ CreateMetaElement('og:description', 'Checkout this
+                                deal!') }} {{ CreateMetaElement('og:image',(fbProductDetails | async)?.ImageLink) }}
                             </div>
                         </div>
                         <div class="row">

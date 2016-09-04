@@ -56,15 +56,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        /*jQuery("#ddCategory").on('click', 'li a', function () {
-            jQuery("#btnCategory.btn:first-child").text(jQuery(this).text());
-            jQuery("#btnCategory.btn:first-child").val(jQuery(this).text());
-        });
 
-        jQuery("#ddBrand").on('click', 'li a', function () {
-            jQuery("#btnBrand.btn:first-child").text(jQuery(this).text());
-            jQuery("#btnBrand.btn:first-child").val(jQuery(this).text());
-        });*/
     }
 
     howdyLogin(user) {
@@ -159,7 +151,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         clearTimeout(this.timerTiny);
     }
 
-    addProduct(name: string, desc: string, imgUrl: string, details: string, mrp: string, price: string) {
+    addProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
+                details: string, mrp: string, price: string) {
         var data: Object;
         details = tinymce.activeEditor.getContent();
         data = {
@@ -170,6 +163,9 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             'Name': name,
             'Description': desc,
             'ImageLink': imgUrl,
+            'ImageLink1': imgUrl1,
+            'ImageLink2': imgUrl2,
+            'ImageLink3': imgUrl3,
             'Details': details,
             'MRP': mrp,
             'Price': price
@@ -186,13 +182,17 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             .catch(err => this.howdyalert('warning', 'Error occurred while addding product.', true));
     }
 
-    updateProduct(name: string, desc: string, imgUrl: string, details: string, mrp: string, price: string) {
+    updateProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
+                    details: string, mrp: string, price: string) {
         var data: Object;
         details = tinymce.activeEditor.getContent();
         data = {
             'Name': name,
             'Description': desc,
             'ImageLink': imgUrl,
+            'ImageLink1': imgUrl1,
+            'ImageLink2': imgUrl2,
+            'ImageLink3': imgUrl3,
             'Details': details,
             'MRP': mrp,
             'Price': price
