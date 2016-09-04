@@ -14,6 +14,10 @@
                 <span class="caret"></span>
             </button>
             <ul id="ddCategory" class="dropdown-menu">
+                <li>
+                    <a (click)="newCategory()">Add New Category</a>
+                </li>
+                <li role="separator" class="divider"></li>
                 <li *ngFor="let categories of fbCategories | async; let index = index">
                     <a (click)="getBrands(index, categories.Name)">{{categories.Name}}</a>
                 </li>
@@ -27,6 +31,10 @@
                 <span class="caret"></span>
             </button>
             <ul id="ddBrand" class="dropdown-menu" *ngIf="selectedCategory">
+                <li>
+                    <a (click)="newBrand()">Add New Brand</a>
+                </li>
+                <li role="separator" class="divider"></li>
                 <li *ngFor="let brand of fbCategoriesBrands | async; let index = index">
                     <a (click)="getProducts(index, brand.Name)">{{brand.Name}}</a>
                 </li>
@@ -51,16 +59,40 @@
             </ul>
         </div>
 
-        <div class='selectedProduct' *ngIf="selectedCategory">
-            <div class="title">
-                S e l e c t e d P r o d u c t |
+        <div class='selectedProduct'>
+            <div class="title" *ngIf="selectedCategory">
+                S e l e c t e d |
                 <span> {{selectedCategory}} </span>
                 <span *ngIf="selectedBrand"> > {{selectedBrand}} </span>
                 <span *ngIf="selectedProduct"> > {{selectedProduct}} </span>
             </div>
+
+            <!-- add category -->
+            <div *ngIf="addNewCategory">
+                <div class="input-group">
+                    <span class="input-group-addon">Category Name</span>
+                    <input type="text" class="form-control" #newCategory>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" (click)="addCategory(newCategory.value)">
+                    Add Category
+                </button>
+            </div>
+
+            <!-- add brand -->
+            <div *ngIf="addNewBrand">
+                <div class="input-group">
+                    <span class="input-group-addon">Brand Name</span>
+                    <input type="text" class="form-control" #newBrand>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" (click)="addBrand(newBrand.value)">
+                    Add Brand
+                </button>
+            </div>
+
             <!-- product details -->
             <div *ngIf="selectedProduct || addNewProduct">
-
                 <div class="input-group">
                     <span class="input-group-addon">Name</span>
                     <input type="text" class="form-control" #pName value="{{ (fbProductDetails | async)?.Name }}">
@@ -108,12 +140,10 @@
                     <input type="text" class="form-control" #pPrice value="{{ (fbProductDetails | async)?.Price }}">
                 </div>
                 <br/>
-                <button *ngIf="addNewProduct" type="submit" class="btn btn-primary" 
-                (click)="addProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
+                <button *ngIf="addNewProduct" type="submit" class="btn btn-primary" (click)="addProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
                     Add Product
                 </button>
-                <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" 
-                (click)="updateProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
+                <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" (click)="updateProduct(pName.value, pDesc.value, pImgLink.value, pImgLink1.value, pImgLink2.value, pImgLink3.value, pDetails.value, pMRP.value, pPrice.value)">
                     Update
                 </button>
                 <button *ngIf="selectedProduct" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal">

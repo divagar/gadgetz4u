@@ -21,6 +21,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     fbCategoriesBrands: FirebaseObjectObservable<any>;
     fbProducts: Observable<any[]>;
     fbProductDetails: FirebaseObjectObservable<any>;
+
+    fbNewCategories: FirebaseListObservable<any>;
     fbNewProduct: FirebaseListObservable<any>;
 
     selectedCategory: string;
@@ -29,6 +31,9 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     selectedBrandId: number;
     selectedProduct: string;
     selectedProductId: number;
+
+    addNewCategory: boolean;
+    addNewBrand: boolean;
     addNewProduct: boolean;
 
     timerTiny: any;
@@ -86,6 +91,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.selectedBrandId = null;
         this.selectedProduct = null;
         this.selectedProductId = null;
+        this.addNewCategory = false;
+        this.addNewBrand = false;
         this.addNewProduct = false;
 
         var query: string = "/Categories/" + this.selectedCategoryId + '/Brands';
@@ -98,6 +105,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.selectedBrandId = index;
         this.selectedProduct = null;
         this.selectedProductId = null;
+        this.addNewCategory = false;
+        this.addNewBrand = false;
         this.addNewProduct = false;
 
         var query: string = '/Products';
@@ -117,6 +126,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     getProduct(index: number, name: string) {
         this.selectedProduct = name;
         this.selectedProductId = index;
+        this.addNewCategory = false;
+        this.addNewBrand = false;
         this.addNewProduct = false;
 
         var query: string = '/Products/' + index;
@@ -124,12 +135,56 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.fbProductDetails = this.af.database.object(query);
     }
 
+    newCategory() {
+        this.selectedProduct = null;
+        this.selectedProductId = null;
+        this.addNewCategory = true;
+        this.addNewBrand = false;
+        this.addNewProduct = false;
+
+        this.fbProducts = null;
+        this.fbProductDetails = null;
+    }
+
+    newBrand() {
+        this.selectedProduct = null;
+        this.selectedProductId = null;
+        this.addNewCategory = false;
+        this.addNewBrand = true;
+        this.addNewProduct = false;
+
+        this.fbProducts = null;
+        this.fbProductDetails = null;
+    }
+
     newProduct() {
         this.selectedProduct = null;
         this.selectedProductId = null;
+        this.addNewCategory = false;
+        this.addNewBrand = false;
         this.addNewProduct = true;
 
         this.fbProductDetails = null;
+        tinymce.activeEditor.setContent("");
+    }
+
+    addCategory(name: string) {
+        console.log('addCategory');
+        console.log(name);
+        var query: string = "/Categories"
+        console.log(query);
+
+        this.howdyalert('info', 'Processing.', true);
+        this.fbNewCategories = this.af.database.list(query);
+        const promise = this.fbNewCategories.push({'Name': name, 'Brands': ''});
+        promise
+            .then(_ => this.howdyalert('success', 'New Category created successfully.', true))
+            .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
+    }
+
+    addBrand(name: string) {
+        console.log('addBrand');
+        console.log(name);
     }
 
     loadTinyMCE(details: string) {
@@ -152,7 +207,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     addProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
-                details: string, mrp: string, price: string) {
+        details: string, mrp: string, price: string) {
         var data: Object;
         details = tinymce.activeEditor.getContent();
         data = {
@@ -183,7 +238,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     updateProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
-                    details: string, mrp: string, price: string) {
+        details: string, mrp: string, price: string) {
         var data: Object;
         details = tinymce.activeEditor.getContent();
         data = {
@@ -218,6 +273,8 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.howdyAlert = status;
         this.selectedProduct = null;
         this.selectedProductId = null;
+        this.addNewCategory = false;
+        this.addNewBrand = false;
         this.addNewProduct = false;
     }
 
@@ -225,4 +282,3 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.howdyAlert = false;
     }
 }
-
