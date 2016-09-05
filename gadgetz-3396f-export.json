@@ -1,65 +1,96 @@
 {
-  "Categories" : [ {
-    "Brands" : [ {
-      "Name" : "HP"
-    }, {
-      "Name" : "Dell"
-    }, {
-      "Name" : "Lenovo"
-    }, {
-      "Name" : "Asus"
-    }, {
-      "Name" : "Acer"
-    }, {
-      "Name" : "Apple"
-    } ],
-    "Name" : "Laptops"
-  }, {
-    "Brands" : [ {
-      "Name" : "Apple"
-    }, {
-      "Name" : "Samsung"
-    }, {
-      "Name" : "Lenovo"
-    }, {
-      "Name" : "Asus"
-    }, {
-      "Name" : "Mi"
-    }, {
-      "Name" : "Micromax"
-    } ],
-    "Name" : "Mobiles"
-  }, {
-    "Brands" : [ {
-      "Name" : "Sony"
-    }, {
-      "Name" : "Samsung"
-    }, {
-      "Name" : "LG"
-    }, {
-      "Name" : "Micromax"
-    }, {
-      "Name" : "VU"
-    }, {
-      "Name" : "Onida"
-    } ],
-    "Name" : "TV"
-  }, {
-    "Brands" : [ {
-      "Name" : "LG"
-    } ],
-    "Name" : "A/C"
-  }, {
-    "Brands" : [ {
-      "Name" : "Oppo"
-    } ],
-    "Name" : "Others"
-  }, {
-    "Brands" : [ {
-      "Name" : "MTT"
-    } ],
-    "Name" : "Accessories"
-  } ],
+  "Categories" : {
+    "-KQsOtjw9niRpTbRpThJ" : {
+      "Brands" : {
+        "-KQsOwXJsKu300ivgy_1" : {
+          "Name" : "HP"
+        },
+        "-KQsOy0A3gzpu1m0p263" : {
+          "Name" : "Dell"
+        },
+        "-KQsP-YUKXBR2PDpd3b_" : {
+          "Name" : "Lenovo"
+        },
+        "-KQsP0jC51zWroMjUSUk" : {
+          "Name" : "Asus"
+        },
+        "-KQsP2WzfyFGAI8Io70E" : {
+          "Name" : "Apple"
+        }
+      },
+      "Name" : "Laptops"
+    },
+    "-KQsP60Or8dLFlgHQPQp" : {
+      "Brands" : {
+        "-KQsP80oOXjxmTvsgbCF" : {
+          "Name" : "Apple"
+        },
+        "-KQsPAc1W9Yg4zuaODcK" : {
+          "Name" : "Samsung"
+        },
+        "-KQsPBliWdsfWRCmHpih" : {
+          "Name" : "Asus"
+        },
+        "-KQsPEZMsoSQek6frmHZ" : {
+          "Name" : "Lenovo"
+        },
+        "-KQsPGATWjTxsOkGMnAx" : {
+          "Name" : "Mi"
+        },
+        "-KQsPIHkqPS-aA2_8du0" : {
+          "Name" : "Micromax"
+        }
+      },
+      "Name" : "Mobiles"
+    },
+    "-KQsPKeMV_VikgSv4ja0" : {
+      "Brands" : {
+        "-KQsPNB2aJJj7oMXfuFk" : {
+          "Name" : "Sony"
+        },
+        "-KQsPP4HAWtn6edc8Qqw" : {
+          "Name" : "Samsung"
+        },
+        "-KQsPQLcRH_Ng5OeLchO" : {
+          "Name" : "LG"
+        },
+        "-KQsPSFmsH_1qxAJuFwa" : {
+          "Name" : "Micromax"
+        },
+        "-KQsPTyYFCHgadraSbtB" : {
+          "Name" : "VU"
+        },
+        "-KQsPVZjkcVPqTsc9mDm" : {
+          "Name" : "Onida"
+        }
+      },
+      "Name" : "TV"
+    },
+    "-KQsP_YDIRylGtGdLiho" : {
+      "Brands" : {
+        "-KQsPbLFCr7dQ1cuU5iT" : {
+          "Name" : "LG"
+        }
+      },
+      "Name" : "A/C"
+    },
+    "-KQsPegHW6h7_6QwYe2N" : {
+      "Brands" : {
+        "-KQsPhE708MjrA8470zw" : {
+          "Name" : "Oppo"
+        }
+      },
+      "Name" : "Others"
+    },
+    "-KQsPja_jn_PZPDhi5YM" : {
+      "Brands" : {
+        "-KQsPm8dd0qA_d02QnSt" : {
+          "Name" : "MTT"
+        }
+      },
+      "Name" : "Accessories"
+    }
+  },
   "Products" : {
     "-KKP6ySBq3i9oniv56uP" : {
       "Brands" : "Dell",
