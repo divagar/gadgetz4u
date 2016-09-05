@@ -21,11 +21,9 @@ export class HomeComponent implements AfterViewInit {
     ngAfterViewInit() {
         jQuery("#owl").owlCarousel({
             // Most important owl features
-            items: 3,
-
+            singleItem: true,
             //Basic Speeds
             slideSpeed: 100,
-
             //Autoplay
             autoPlay: true,
             stopOnHover: true,
