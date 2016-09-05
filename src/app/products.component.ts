@@ -20,13 +20,13 @@ declare var jQuery: any;
 })
 
 export class ProductsComponent implements OnInit, AfterViewInit {
-    fbCategories: FirebaseObjectObservable<any>;
-    fbCategoriesBrands: FirebaseObjectObservable<any>;
+    fbCategories: Observable<any[]>;
+    fbCategoriesBrands: Observable<any[]>;
     fbProducts: Observable<any[]>;
     fbProductDetails: FirebaseObjectObservable<any>;
 
     selectedCategory: string;
-    selectedCategoryId: number;
+    selectedCategoryId: string;
     selectedBrand: string;
     selectedProduct: string;
     selectedProductId: string;
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         try {
             //Route params
             this.selectedCategory = params.getParam('c');
-            this.selectedCategoryId = Number(params.getParam('cId'));
+            this.selectedCategoryId = params.getParam('cId');
             this.selectedBrand = params.getParam('b');
             this.selectedProductId = params.getParam('pId');
             // if (params.getParam('p') != undefined)
@@ -88,7 +88,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             //owl
             jQuery("#owl").owlCarousel({
                 // Most important owl features
-                singleItem:true,
+                singleItem: true,
                 //Autoplay
                 autoPlay: false,
                 stopOnHover: true,
@@ -111,7 +111,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     getCategories() {
         var query: string = '/Categories';
         console.log(query);
-        this.fbCategories = this.af.database.object(query);
+        this.fbCategories = this.af.database.list(query).map((_categories) => {
+            return _categories.map((_category) => {
+                return _category;
+            })
+        });
 
         //product listing
         if (this.selectedCategory == undefined)
@@ -120,9 +124,13 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     getBrands() {
         //Brand listing
-        var query: string = '/Categories/' + this.selectedCategoryId + '/Brands';
+        var query: string = "/Categories/" + this.selectedCategoryId + '/Brands';
         console.log(query);
-        this.fbCategoriesBrands = this.af.database.object(query);
+        this.fbCategoriesBrands = this.af.database.list(query).map((_brands) => {
+            return _brands.map((_brand) => {
+                return _brand;
+            })
+        });
 
         //product listing
         if (this.selectedBrand == undefined)
@@ -147,7 +155,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     getProductListing(orderby: string, equalto: string) {
         var queryUrl: string = '/Products/';
         console.log(queryUrl);
-        console.log("orderby = " + orderby + " equalto = " + equalto);
+        //console.log("orderby = " + orderby + " equalto = " + equalto);
 
         var fbQuery;
         if (equalto != undefined) {
@@ -177,18 +185,18 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.productQueryStatus = "Loading";
         this.fbProducts.subscribe(
             x => {
-                console.log('Next: %s', x);
+                //console.log('Next: %s', x);
                 if (x == undefined)
                     this.productQueryStatus = "Empty";
                 else
                     this.productQueryStatus = "Data";
             },
             e => {
-                console.log('Error: %s', e);
+                //console.log('Error: %s', e);
                 this.productQueryStatus = "Error";
             },
             () => {
-                console.log('Completed');
+                //console.log('Completed');
                 this.productQueryStatus = "Loading";
             }
         );

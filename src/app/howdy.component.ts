@@ -17,20 +17,21 @@ declare var tinymce: any;
 })
 
 export class HowdyComponent implements OnInit, AfterViewInit {
-    fbCategories: FirebaseObjectObservable<any>;
-    fbCategoriesBrands: FirebaseObjectObservable<any>;
+    fbCategories: Observable<any[]>;
+    fbCategoriesBrands: Observable<any[]>;
     fbProducts: Observable<any[]>;
     fbProductDetails: FirebaseObjectObservable<any>;
 
     fbNewCategories: FirebaseListObservable<any>;
+    fbNewBrand: FirebaseListObservable<any>;
     fbNewProduct: FirebaseListObservable<any>;
 
     selectedCategory: string;
-    selectedCategoryId: number;
+    selectedCategoryId: string;
     selectedBrand: string;
-    selectedBrandId: number;
+    selectedBrandId: string;
     selectedProduct: string;
-    selectedProductId: number;
+    selectedProductId: string;
 
     addNewCategory: boolean;
     addNewBrand: boolean;
@@ -81,10 +82,14 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     getCategory() {
         var query: string = "/Categories"
         console.log(query);
-        this.fbCategories = this.af.database.object(query);
+        this.fbCategories = this.af.database.list(query).map((_categories) => {
+            return _categories.map((_category) => {
+                return _category;
+            })
+        });
     }
 
-    getBrands(index: number, name: string) {
+    getBrands(index: string, name: string) {
         this.selectedCategory = name;
         this.selectedCategoryId = index;
         this.selectedBrand = null;
@@ -97,10 +102,14 @@ export class HowdyComponent implements OnInit, AfterViewInit {
 
         var query: string = "/Categories/" + this.selectedCategoryId + '/Brands';
         console.log(query);
-        this.fbCategoriesBrands = this.af.database.object(query);
+        this.fbCategoriesBrands = this.af.database.list(query).map((_brands) => {
+            return _brands.map((_brand) => {
+                return _brand;
+            })
+        });
     }
 
-    getProducts(index: number, pBrand: string) {
+    getProducts(index: string, pBrand: string) {
         this.selectedBrand = pBrand;
         this.selectedBrandId = index;
         this.selectedProduct = null;
@@ -123,7 +132,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         });
     }
 
-    getProduct(index: number, name: string) {
+    getProduct(index: string, name: string) {
         this.selectedProduct = name;
         this.selectedProductId = index;
         this.addNewCategory = false;
@@ -169,22 +178,27 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     }
 
     addCategory(name: string) {
-        console.log('addCategory');
-        console.log(name);
         var query: string = "/Categories"
         console.log(query);
 
         this.howdyalert('info', 'Processing.', true);
         this.fbNewCategories = this.af.database.list(query);
-        const promise = this.fbNewCategories.push({'Name': name, 'Brands': ''});
+        const promise = this.fbNewCategories.push({ 'Name': name, 'Brands': '' });
         promise
             .then(_ => this.howdyalert('success', 'New Category created successfully.', true))
             .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
     }
 
     addBrand(name: string) {
-        console.log('addBrand');
-        console.log(name);
+        var query: string = "/Categories/"+this.selectedCategoryId+"/Brands"
+        console.log(query);
+
+        this.howdyalert('info', 'Processing.', true);
+        this.fbNewBrand = this.af.database.list(query);
+        const promise = this.fbNewBrand.push({'Name': name});
+        promise
+            .then(_ => this.howdyalert('success', 'New Brand created successfully.', true))
+            .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
     }
 
     loadTinyMCE(details: string) {

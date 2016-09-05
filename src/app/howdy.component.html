@@ -18,8 +18,8 @@
                     <a (click)="newCategory()">Add New Category</a>
                 </li>
                 <li role="separator" class="divider"></li>
-                <li *ngFor="let categories of fbCategories | async; let index = index">
-                    <a (click)="getBrands(index, categories.Name)">{{categories.Name}}</a>
+                <li *ngFor="let categories of fbCategories | async;">
+                    <a (click)="getBrands(categories.$key, categories.Name)">{{categories.Name}}</a>
                 </li>
             </ul>
         </div>
@@ -35,8 +35,8 @@
                     <a (click)="newBrand()">Add New Brand</a>
                 </li>
                 <li role="separator" class="divider"></li>
-                <li *ngFor="let brand of fbCategoriesBrands | async; let index = index">
-                    <a (click)="getProducts(index, brand.Name)">{{brand.Name}}</a>
+                <li *ngFor="let brand of fbCategoriesBrands | async;">
+                    <a (click)="getProducts(brand.$key, brand.Name)">{{brand.Name}}</a>
                 </li>
             </ul>
         </div>

@@ -13,8 +13,8 @@
                 <ul class="dropdown-menu" *ngIf="fbCategories">
                     <li><a (click)="selectDefault()" *ngIf="selectedCategory">All</a></li>
                     <li role="separator" class="divider" *ngIf="selectedCategory"></li>
-                    <li *ngFor="let categories of fbCategories | async; let index = index" [class.active]="isCategoryActive(categories.Name)">
-                        <a class="mmLink" [routerLink]="['/products', { c: categories.Name, cId: index }]">
+                    <li *ngFor="let categories of fbCategories | async;" [class.active]="isCategoryActive(categories.Name)">
+                        <a class="mmLink" [routerLink]="['/products', { c: categories.Name, cId: categories.$key }]">
                             {{categories.Name}}
                         </a>
                     </li>
@@ -29,7 +29,7 @@
                     Brand : {{selectedBrand}} &nbsp; &nbsp;  <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" *ngIf="fbCategoriesBrands">
-                    <li *ngFor="let brand of fbCategoriesBrands | async; let index = index" [class.active]="isBrandActive(brand.Name)">
+                    <li *ngFor="let brand of fbCategoriesBrands | async;" [class.active]="isBrandActive(brand.Name)">
                         <a class="mmLink" [routerLink]="['/products', { c: selectedCategory, cId: selectedCategoryId, b: brand.Name }]">
                             {{brand.Name}}
                         </a>
