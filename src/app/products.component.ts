@@ -85,13 +85,23 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             //share button
             FB.XFBML.parse();
             twttr.widgets.load();
-            //owl
-            jQuery("#owl").owlCarousel({
-                // Most important owl features
-                singleItem: true,
-                //Autoplay
-                autoPlay: false,
-                stopOnHover: true,
+            //slick carousel
+            jQuery(".mSlickCarousel").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.tSlickCarousel'
+            });
+            jQuery(".tSlickCarousel").slick({
+                slidesToShow: 4,
+                slidesToScroll: 3,
+                asNavFor: '.mSlickCarousel',
+                dots: true,
+                arrows: true,
+                centerMode: false,
+                vertical: false,
+                focusOnSelect: true
             });
         }
         catch (e) {

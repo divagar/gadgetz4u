@@ -88,21 +88,37 @@
 
                 <!-- product details dynamic content start -->
                 <div class="productDetails row row-centered" *ngIf="fbProductDetails">
-                    <div id="owl" class="col-md-4 owl-carousel">
-                        <div class="pImage">
-                            <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="lazyOwl image-responsive" />
+                    <div class="col-md-7">
+                        <div class="mSlickCarousel">
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink1 }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink2 }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink3 }}" class="image-responsive" />
+                            </div>
                         </div>
-                        <div class="pImage">
-                            <img src="{{ (fbProductDetails | async)?.ImageLink1 }}" class="lazyOwl image-responsive" />
-                        </div>
-                        <div class="pImage">
-                            <img src="{{ (fbProductDetails | async)?.ImageLink2 }}" class="lazyOwl image-responsive" />
-                        </div>
-                        <div class="pImage">
-                            <img src="{{ (fbProductDetails | async)?.ImageLink3 }}" class="lazyOwl image-responsive" />
+                        <div class="tSlickCarousel">
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink1 }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink2 }}" class="image-responsive" />
+                            </div>
+                            <div class="pImage">
+                                <img src="{{ (fbProductDetails | async)?.ImageLink3 }}" class="image-responsive" />
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-8 pDetails">
+                    <div class="col-md-5 pDetails">
                         <div class="row">
                             <div class="col-md-12 pName">
                                 <h2>{{ (fbProductDetails | async)?.Name }}</h2>
