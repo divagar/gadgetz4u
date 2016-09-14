@@ -82,9 +82,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         try {
-            //share button
-            FB.XFBML.parse();
-            twttr.widgets.load();
             //slick carousel
             jQuery(".mSlickCarousel").slick({
                 slidesToShow: 1,
@@ -103,6 +100,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                 vertical: false,
                 focusOnSelect: true
             });
+
+            //share button
+            FB.XFBML.parse();
+            twttr.widgets.load();
         }
         catch (e) {
             console.log("Product ngAfterViewInit: error - " + e);
