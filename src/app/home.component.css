@@ -1,7 +1,13 @@
-#owl a:hover{
+.hSlickCarousel {
+    padding: 20px;
+}
+.hSlickCarousel a:hover{
     text-decoration: none;
 }
-#owl .item {
+.hSlickCarousel img:hover {
+    cursor: pointer; cursor: hand;
+}
+.hSlickCarousel .item {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -10,16 +16,16 @@
     margin: 10px;
     color: #FFF;
 }
-#owl .item img {
+.hSlickCarousel .item img {
     margin-top: -18px;
-    margin-left: -35%;
+    margin-left: 2%;
     position: absolute;
 }
-#owl .item p {
+.hSlickCarousel .item p {
     font-size: 18px;
     font-weight: 200;
 }
-#owl .item h3 {
+.hSlickCarousel .item h3 {
     font-size: 32px;
 }
 /* color from https://color.adobe.com/Modern-Office-color-theme-42613 */
@@ -37,4 +43,7 @@
 }
 .color5 {
     background: #D9D7AC;
+}
+.slick-slide {
+    outline: none !important;
 }

@@ -19,14 +19,11 @@ export class HomeComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        jQuery("#owl").owlCarousel({
-            // Most important owl features
-            singleItem: true,
-            //Basic Speeds
-            slideSpeed: 100,
-            //Autoplay
-            autoPlay: true,
-            stopOnHover: true,
+        jQuery(".hSlickCarousel").slick({
+            dots: true,
+            arrows: true,
+            autoplay: false,
+            autoplaySpeed: 2000,
         });
     }
 }
