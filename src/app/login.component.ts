@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import {
   AuthMethods,
   AuthProviders,
@@ -14,10 +14,9 @@ import 'rxjs/add/operator/do';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css'],
+  styleUrls: ['login.component.css']
 })
 
 export class LoginComponent {

@@ -1,15 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
+import { map } from 'rxjs/operator/map';
 import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
 declare var tinymce: any;
 
 @Component({
-    moduleId: module.id,
     selector: 'howdy',
     templateUrl: 'howdy.component.html',
     styleUrls: ['howdy.component.css'],
@@ -82,7 +82,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     getCategory() {
         var query: string = "/Categories"
         console.log(query);
-        this.fbCategories = this.af.database.list(query).map((_categories) => {
+        this.fbCategories = map.call(this.af.database.list(query, {}), (_categories: any[]) => {
             return _categories.map((_category) => {
                 return _category;
             })
@@ -102,7 +102,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
 
         var query: string = "/Categories/" + this.selectedCategoryId + '/Brands';
         console.log(query);
-        this.fbCategoriesBrands = this.af.database.list(query).map((_brands) => {
+        this.fbCategoriesBrands = map.call(this.af.database.list(query, {}), (_brands: any[]) => {
             return _brands.map((_brand) => {
                 return _brand;
             })
@@ -120,12 +120,12 @@ export class HowdyComponent implements OnInit, AfterViewInit {
 
         var query: string = '/Products';
         console.log(query);
-        this.fbProducts = this.af.database.list(query, {
+        this.fbProducts = map.call(this.af.database.list(query, {
             query: {
                 orderByChild: "Categories_Brands",
                 equalTo: this.selectedCategory + '_' + pBrand
             }
-        }).map((_products) => {
+        }), (_products: any[]) => {
             return _products.map((_product) => {
                 return _product;
             })

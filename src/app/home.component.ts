@@ -1,15 +1,13 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
 @Component({
-    moduleId: module.id,
     selector: 'home',
     templateUrl: 'home.component.html',
-    styleUrls: ['home.component.css'],
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['home.component.css']
 })
 
 export class HomeComponent implements AfterViewInit {

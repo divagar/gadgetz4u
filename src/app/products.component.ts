@@ -1,22 +1,21 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operator/map';
 import { Subject } from 'rxjs/Subject';
 import { Title } from '@angular/platform-browser';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { Routes, Router, ActivatedRoute } from '@angular/router';
 
 declare var FB: any;
 declare var twttr: any;
 declare var jQuery: any;
 
 @Component({
-    moduleId: module.id,
     selector: 'products',
     templateUrl: 'products.component.html',
-    styleUrls: ['products.component.css'],
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['products.component.css']
 })
 
 export class ProductsComponent implements OnInit, AfterViewInit {
@@ -40,36 +39,41 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     constructor(
         public af: AngularFire,
         public router: Router,
-        public params: RouteSegment,
-        public sanitizer: DomSanitizationService,
+        public route: ActivatedRoute,
+        public sanitizer: DomSanitizer,
         public titleService: Title) {
 
         //Set page title
         this.titleService.setTitle("Gadgetz4u India | Gadgetz");
 
         try {
-            //Route params
-            this.selectedCategory = params.getParam('c');
-            this.selectedCategoryId = params.getParam('cId');
-            this.selectedBrand = params.getParam('b');
-            this.selectedProductId = params.getParam('pId');
+            //Get Route params
+            route.params.subscribe(
+                params => {
+                    this.selectedCategory = params['c'];
+                    this.selectedCategoryId = params['cId'];
+                    this.selectedBrand = params['b'];
+                    this.selectedProductId = params['pId'];
+
+                    //Get categories
+                    this.getCategories();
+
+                    //Get Brands
+                    if (this.selectedCategory != undefined && this.selectedCategoryId != undefined)
+                        this.getBrands();
+
+                    //Get Product Details
+                    //if (this.selectedProduct != undefined && this.selectedProductId != undefined)
+                    if (this.selectedProductId != undefined)
+                        this.getProductDetails();
+
+                    //Get Products
+                    else if (this.selectedCategory != undefined && this.selectedBrand != undefined)
+                        this.getProducts();
+                }
+            );
             // if (params.getParam('p') != undefined)
             //     this.selectedProduct = decodeURIComponent(params.getParam('p'));
-
-            //Get categories
-            this.getCategories();
-
-            //Get Brands
-            if (this.selectedCategory != undefined && this.selectedCategoryId != undefined)
-                this.getBrands();
-
-            //Get Product Details
-            //if (this.selectedProduct != undefined && this.selectedProductId != undefined)
-            if (this.selectedProductId != undefined)
-                this.getProductDetails();
-            //Get Products
-            else if (this.selectedCategory != undefined && this.selectedBrand != undefined)
-                this.getProducts();
         }
         catch (e) {
             console.log("products constructor: error - " + e);
@@ -122,7 +126,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     getCategories() {
         var query: string = '/Categories';
         console.log(query);
-        this.fbCategories = this.af.database.list(query).map((_categories) => {
+        this.fbCategories = map.call(this.af.database.list(query, {}), (_categories: any[]) => {
             return _categories.map((_category) => {
                 return _category;
             })
@@ -137,7 +141,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         //Brand listing
         var query: string = "/Categories/" + this.selectedCategoryId + '/Brands';
         console.log(query);
-        this.fbCategoriesBrands = this.af.database.list(query).map((_brands) => {
+        this.fbCategoriesBrands = map.call(this.af.database.list(query, {}), (_brands: any[]) => {
             return _brands.map((_brand) => {
                 return _brand;
             })
@@ -181,8 +185,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
             };
         }
 
-        this.fbProducts = this.af.database.list(queryUrl, { query: fbQuery })
-            .map((_products) => {
+        this.fbProducts = map.call(this.af.database.list(queryUrl, { query: fbQuery }),
+            (_products: any[]) => {
                 if (_products.length == 0)
                     return undefined;
                 else {
@@ -255,14 +259,16 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
 
     isCategoryActive(category: string) {
-        let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
-        let parameters = currentRoute == null ? null : currentRoute.parameters['c'];
-        return parameters == category;
+        //TODO
+        // let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
+        // let parameters = currentRoute == null ? null : currentRoute.parameters['c'];
+        // return parameters == category;
     }
     isBrandActive(brand: string) {
-        let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
-        let parameters = currentRoute == null ? null : currentRoute.parameters['b'];
-        return parameters == brand;
+        //TODO
+        // let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
+        // let parameters = currentRoute == null ? null : currentRoute.parameters['b'];
+        // return parameters == brand;
     }
 
     encodeURIComponent(str) {

@@ -5,7 +5,6 @@ declare var FB: any;
 declare var twttr: any;
 
 @Component({
-  moduleId: module.id,
   selector: 'about',
   templateUrl: 'about.component.html',
   styleUrls: ['about.component.css']
