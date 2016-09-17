@@ -126,8 +126,11 @@
                                 {{updatePageTileWithProductInfo( (fbProductDetails | async)?.Name, (fbProductDetails | async)?.Price, (fbProductDetails |
                                 async)?.MRP )}}
                                 <!-- Page meta -->
-                                {{ CreateMetaElement('og:title', (fbProductDetails | async)?.Name) }} {{ CreateMetaElement('og:description', 'Checkout this
-                                deal!') }} {{ CreateMetaElement('og:image',(fbProductDetails | async)?.ImageLink) }}
+                                {{ CreateMetaElement('og:url', 'http://www.your-domain.com/your-page.html') }}
+                                {{ CreateMetaElement('og:type', 'website') }}
+                                {{ CreateMetaElement('og:title', (fbProductDetails | async)?.Name) }}
+                                {{ CreateMetaElement('og:description', 'Checkout this deal!') }}
+                                {{ CreateMetaElement('og:image',(fbProductDetails | async)?.ImageLink) }}
                             </div>
                         </div>
                         <div class="row">
@@ -149,7 +152,7 @@
                         <div class="row">
                             <div class="col-md-12 pShare">
                                 <!-- fb share -->
-                                <div class="fb-share-button" data-layout="button" data-mobile-iframe="true">
+                                <div class="fb-share-button" data-layout="button">
                                     <a class="fb-xfbml-parse-ignore" target="_blank">Share</a>
                                 </div>
                                 <!-- twitter share -->
