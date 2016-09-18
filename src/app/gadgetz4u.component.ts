@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 declare var jQuery: any;
 
@@ -11,7 +10,7 @@ declare var jQuery: any;
 
 export class Gadgetz4uAppComponent implements AfterViewInit {
 
-  public constructor(public router: Router) { };
+  public constructor() { };
 
   ngAfterViewInit() {
     try {
@@ -25,12 +24,5 @@ export class Gadgetz4uAppComponent implements AfterViewInit {
     catch (e) {
       console.log("Gadget4u ngAfterViewInit: error - " + e);
     }
-  }
-
-  isRouteActive(path: string) {
-    //TODO
-    // let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
-    // let segment = currentRoute == null ? '/' : currentRoute.segment;
-    // return segment == path;
   }
 }

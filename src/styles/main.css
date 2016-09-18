@@ -137,8 +137,11 @@ body {
     z-index: 10;
 }
 
-#header-global .header-main nav li.active{
+#header-global .header-main nav li.active, #header-global .header-main nav li.active:hover {
     color: #000;
+    background-color: #337AB7 !important;
+}
+#header-global .header-main .nav>li.active>a:focus, #header-global .header-main .nav>li.active>a:hover {
     background-color: #337AB7 !important;
 }
 #header-global .header-main nav a {
