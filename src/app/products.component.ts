@@ -85,32 +85,42 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        try {
-            //slick carousel
-            jQuery(".mSlickCarousel").slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                fade: true,
-                asNavFor: '.tSlickCarousel'
-            });
-            jQuery(".tSlickCarousel").slick({
-                slidesToShow: 4,
-                slidesToScroll: 3,
-                asNavFor: '.mSlickCarousel',
-                dots: true,
-                arrows: true,
-                centerMode: false,
-                vertical: false,
-                focusOnSelect: true
-            });
+    }
 
-            //share button
-            FB.XFBML.parse();
-            twttr.widgets.load();
+    loadCarousel() {
+        try {
+            let el, el1: HTMLElement;
+            let DOM = getDOM();
+
+            el = DOM.query('div.mSlickCarousel');
+            el1 = DOM.query('div.mSlickCarousel.slick-initialized');
+
+            if (el !== null && el1 === null) {
+                //slick carousel
+                jQuery(".mSlickCarousel").slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '.tSlickCarousel'
+                });
+                jQuery(".tSlickCarousel").slick({
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                    asNavFor: '.mSlickCarousel',
+                    dots: true,
+                    arrows: true,
+                    centerMode: false,
+                    vertical: false,
+                    focusOnSelect: true
+                });
+                //share button
+                FB.XFBML.parse();
+                twttr.widgets.load();
+            }
         }
         catch (e) {
-            console.log("Product ngAfterViewInit: error - " + e);
+            console.log("call scripts getProductDetails: error - " + e);
         }
     }
 
