@@ -243,3 +243,9 @@ body {
   display: block; 
   width: inherit; 
 }
+
+/* hack for SlickCarousel */
+.slick-slider ul.slick-dots {
+    left: 0px !important;
+    bottom: -5px !important;
+}

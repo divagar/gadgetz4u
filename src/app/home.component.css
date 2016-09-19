@@ -45,6 +45,12 @@
 .color5 {
     background: #D9D7AC;
 }
+
+/* hack for SlickCarousel */
 .slick-slide {
     outline: none !important;
+}
+.slick-slider {
+    /*overflow-x: hidden !important;
+    overflow-y: hidden !important;*/
 }
