@@ -20,7 +20,7 @@ export class HomeComponent implements AfterViewInit {
         jQuery(".hSlickCarousel").slick({
             dots: true,
             arrows: true,
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 2000,
         });
     }
