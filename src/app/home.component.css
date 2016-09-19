@@ -12,14 +12,15 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
     text-align: center;
-    padding: 100px 0px;
+    padding: 40px 0px;
     margin: 10px;
     color: #FFF;
 }
 .hSlickCarousel .item img {
-    margin-top: -18px;
+    /*margin-top: -18px;
     margin-left: 2%;
-    position: absolute;
+    position: absolute;*/
+    margin: auto;
 }
 .hSlickCarousel .item p {
     font-size: 18px;
