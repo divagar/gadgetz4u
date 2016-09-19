@@ -19,9 +19,9 @@ export class HomeComponent implements AfterViewInit {
     ngAfterViewInit() {
         jQuery(".hSlickCarousel").slick({
             dots: true,
-            arrows: true,
+            arrows: false,
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 5000,
         });
     }
 }
