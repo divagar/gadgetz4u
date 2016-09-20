@@ -269,16 +269,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
 
     isCategoryActive(category: string) {
-        //TODO
-        // let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
-        // let parameters = currentRoute == null ? null : currentRoute.parameters['c'];
-        // return parameters == category;
+        return this.selectedCategory == category;
     }
     isBrandActive(brand: string) {
-        //TODO
-        // let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);
-        // let parameters = currentRoute == null ? null : currentRoute.parameters['b'];
-        // return parameters == brand;
+        return this.selectedBrand == brand;
     }
 
     encodeURIComponent(str) {
