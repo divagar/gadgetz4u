@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   AuthMethods,
   AuthProviders,
@@ -8,7 +9,8 @@ import {
   FIREBASE_PROVIDERS,
   FirebaseListObservable,
   FirebaseAuthState,
-  FirebaseApp} from 'angularfire2';
+  FirebaseApp
+} from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Title } from '@angular/platform-browser';
@@ -27,13 +29,22 @@ export class LoginComponent {
 
   user: FirebaseAuthState;
 
+  loginForm: FormGroup;
+
   constructor(
     public af: AngularFire,
     public router: Router,
-    private titleService: Title) {
+    private titleService: Title,
+    private formBuilder: FormBuilder) {
 
     //Set page title
     this.titleService.setTitle("Gadgetz4u India | Login");
+
+    //login form
+    this.loginForm = formBuilder.group({
+      username: formBuilder.control(null),
+      password: formBuilder.control(null)
+    });
 
     //get af auth status
     af.auth
@@ -42,7 +53,9 @@ export class LoginComponent {
   }
 
   /* login user */
-  loginUser(email: string, password: string) {
+  loginUser(loginFormVal) {
+    var email: string = loginFormVal.username;
+    var password: string = loginFormVal.password;
     this.af.auth.login({ email, password }, {
       method: AuthMethods.Password,
       provider: AuthProviders.Password

@@ -1,19 +1,20 @@
-<div class="login jumbotron center-block">
-    <h1>Welcome</h1>
-    <p>Login to access the dashboard</p>
-    <div class="form-group">
-        <!--<label for="username">Username</label>-->
-        <input type="text" #username class="form-control" id="username" placeholder="Username">
+<form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <div class="login jumbotron center-block">
+        <h1>Welcome</h1>
+        <p>Login to access the dashboard</p>
+        <div class="form-group">
+            <input type="text" #username class="form-control" id="username" required placeholder="Username" formControlName="username">
+        </div>
+        <div class="form-group">
+            <input type="password" #password class="form-control" id="password" required placeholder="Password" formControlName="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="form-group">
-        <!--<label for="password">Password</label>-->
-        <input type="password" #password class="form-control" id="password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="loginUser(username.value, password.value)">Submit</button>
-</div>
+</form>
+
 <!-- alert start -->
 <div class="alert alert-{{loginAlertType}} alert-dismissible" *ngIf="loginAlert" role="alert">
-    <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
     {{loginAlertMsg}}
+    <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
 </div>
 <!-- alert end -->
