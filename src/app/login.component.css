@@ -1,16 +1,43 @@
 @media (min-width: 768px) {
-.login {
-  width: 40%;
+  .login {
+    width: 50% !important;
+  }
+  .alert {
+      width: 50% !important;
+      margin-top: 7% !important;
+  }
 }
+
+@media (min-width: 960px) {
+  .login {
+    width: 40% !important;
+  }
+  .alert {
+      width: 40% !important;
+      margin-top: 7% !important;
+  }
 }
 
 .btn {
   float: right;
 }
 
+.login {
+  width: 60%;
+}
+
 .alert {
-    width: 40%;
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
+  width: 60%;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2%;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }
