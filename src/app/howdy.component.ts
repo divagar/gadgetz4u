@@ -3,6 +3,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Routes, Router } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operator/map';
 import { Title } from '@angular/platform-browser';
 
@@ -43,13 +44,27 @@ export class HowdyComponent implements OnInit, AfterViewInit {
     howdyAlertMsg: string;
     howdyAlertType: string;
 
+    addCategoryForm: FormGroup;
+    addBrandForm: FormGroup;
+
     constructor(public af: AngularFire,
         public loginUser: LoginComponent,
         public router: Router,
-        private titleService: Title) {
+        private titleService: Title,
+        private formBuilder: FormBuilder) {
 
         //Set page title
         this.titleService.setTitle("Gadgetz4u India | Dashboard");
+
+        //add Category form
+        this.addCategoryForm = formBuilder.group({
+            newCategory: formBuilder.control(null)
+        });
+
+        //add Brand form
+        this.addBrandForm = formBuilder.group({
+            newBrand: formBuilder.control(null)
+        });
 
         //get af auth status
         af.auth
@@ -177,25 +192,25 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         tinymce.activeEditor.setContent("");
     }
 
-    addCategory(name: string) {
+    addCategory(newCategoryVal) {
         var query: string = "/Categories"
         console.log(query);
 
         this.howdyalert('info', 'Processing.', true);
         this.fbNewCategories = this.af.database.list(query);
-        const promise = this.fbNewCategories.push({ 'Name': name, 'Brands': '' });
+        const promise = this.fbNewCategories.push({ 'Name': newCategoryVal.newCategory, 'Brands': '' });
         promise
             .then(_ => this.howdyalert('success', 'New Category created successfully.', true))
             .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
     }
 
-    addBrand(name: string) {
-        var query: string = "/Categories/"+this.selectedCategoryId+"/Brands"
+    addBrand(newBrandVal) {
+        var query: string = "/Categories/" + this.selectedCategoryId + "/Brands"
         console.log(query);
 
         this.howdyalert('info', 'Processing.', true);
         this.fbNewBrand = this.af.database.list(query);
-        const promise = this.fbNewBrand.push({'Name': name});
+        const promise = this.fbNewBrand.push({ 'Name': newBrandVal.newBrand });
         promise
             .then(_ => this.howdyalert('success', 'New Brand created successfully.', true))
             .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));

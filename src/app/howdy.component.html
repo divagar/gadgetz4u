@@ -69,26 +69,32 @@
 
             <!-- add category -->
             <div *ngIf="addNewCategory">
-                <div class="input-group">
-                    <span class="input-group-addon">Category Name</span>
-                    <input type="text" class="form-control" #newCategory>
-                </div>
-                <br/>
-                <button type="submit" class="btn btn-primary" (click)="addCategory(newCategory.value)">
+                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(addCategoryForm.value)">
+                    <div class="input-group">
+                        <span class="input-group-addon">Category Name</span>
+                        <input type="text" class="form-control" #newCategory required
+                        placeholder="New Category Name" formControlName="newCategory">
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary">
                     Add Category
-                </button>
+                    </button>
+                </form>
             </div>
 
             <!-- add brand -->
             <div *ngIf="addNewBrand">
-                <div class="input-group">
-                    <span class="input-group-addon">Brand Name</span>
-                    <input type="text" class="form-control" #newBrand>
-                </div>
-                <br/>
-                <button type="submit" class="btn btn-primary" (click)="addBrand(newBrand.value)">
+                <form [formGroup]="addBrandForm" (ngSubmit)="addBrand(addBrandForm.value)">
+                    <div class="input-group">
+                        <span class="input-group-addon">Brand Name</span>
+                        <input type="text" class="form-control" #newBrand required
+                        placeholder="New Brand Name" formControlName="newBrand">
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary">
                     Add Brand
-                </button>
+                    </button>
+                </form>
             </div>
 
             <!-- product details -->
