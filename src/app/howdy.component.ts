@@ -46,6 +46,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
 
     addCategoryForm: FormGroup;
     addBrandForm: FormGroup;
+    addProductForm: FormGroup;
 
     constructor(public af: AngularFire,
         public loginUser: LoginComponent,
@@ -64,6 +65,18 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         //add Brand form
         this.addBrandForm = formBuilder.group({
             newBrand: new FormControl("", Validators.required),
+        });
+
+        //add/update product form
+        this.addProductForm = formBuilder.group({
+            Name: new FormControl("", Validators.required),
+            Description: new FormControl("", Validators.required),
+            ImageLink: new FormControl("", Validators.required),
+            ImageLink1: new FormControl("", Validators.required),
+            ImageLink2: new FormControl("", Validators.required),
+            ImageLink3: new FormControl("", Validators.required),
+            MRP: new FormControl("", Validators.required),
+            Price: new FormControl("", Validators.required),
         });
 
         //get af auth status
@@ -235,57 +248,41 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         clearTimeout(this.timerTiny);
     }
 
-    addProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
-        details: string, mrp: string, price: string) {
+    addProduct(newProduct, productFormVal) {
         var data: Object;
-        details = tinymce.activeEditor.getContent();
+        var details = tinymce.activeEditor.getContent();
         data = {
             'Categories': this.selectedCategory,
             'Brands': this.selectedBrand,
             'Categories_Brands': this.selectedCategory + "_" + this.selectedBrand,
             'CategoriesId': this.selectedCategoryId,
-            'Name': name,
-            'Description': desc,
-            'ImageLink': imgUrl,
-            'ImageLink1': imgUrl1,
-            'ImageLink2': imgUrl2,
-            'ImageLink3': imgUrl3,
+            'Name': productFormVal.Name,
+            'Description': productFormVal.Description,
+            'ImageLink': productFormVal.ImageLink,
+            'ImageLink1': productFormVal.ImageLink1,
+            'ImageLink2': productFormVal.ImageLink2,
+            'ImageLink3': productFormVal.ImageLink3,
             'Details': details,
-            'MRP': mrp,
-            'Price': price
+            'MRP': productFormVal.MRP,
+            'Price': productFormVal.Price
         }
-        //console.log(data);
-        //console.log(details);
-        var query: string = '/Products';
-        console.log(query);
+        console.log(data);
         this.howdyalert('info', 'Processing.', true);
-        this.fbNewProduct = this.af.database.list(query);
-        const promise = this.fbNewProduct.push(data);
-        promise
-            .then(_ => this.howdyalert('success', 'New product added successfully.', true))
-            .catch(err => this.howdyalert('warning', 'Error occurred while addding product.', true));
-    }
-
-    updateProduct(name: string, desc: string, imgUrl: string, imgUrl1: string, imgUrl2: string, imgUrl3: string,
-        details: string, mrp: string, price: string) {
-        var data: Object;
-        details = tinymce.activeEditor.getContent();
-        data = {
-            'Name': name,
-            'Description': desc,
-            'ImageLink': imgUrl,
-            'ImageLink1': imgUrl1,
-            'ImageLink2': imgUrl2,
-            'ImageLink3': imgUrl3,
-            'Details': details,
-            'MRP': mrp,
-            'Price': price
+        if (newProduct) {
+            var query: string = '/Products';
+            console.log(query);
+            this.fbNewProduct = this.af.database.list(query);
+            const promise = this.fbNewProduct.push(data);
+            promise
+                .then(_ => this.howdyalert('success', 'New product added successfully.', true))
+                .catch(err => this.howdyalert('warning', 'Error occurred while addding product.', true));
         }
-        this.howdyalert('info', 'Processing.', true);
-        const promise = this.fbProductDetails.update(data);
-        promise
-            .then(_ => this.howdyalert('success', 'Product updated successfully.', true))
-            .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
+        else {
+            const promise = this.fbProductDetails.update(data);
+            promise
+                .then(_ => this.howdyalert('success', 'Product updated successfully.', true))
+                .catch(err => this.howdyalert('warning', 'Error occurred while update.', true));
+        }
     }
 
     deleteProduct() {
