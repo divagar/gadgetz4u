@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Routes, Router } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operator/map';
 import { Title } from '@angular/platform-browser';
 
@@ -58,12 +58,12 @@ export class HowdyComponent implements OnInit, AfterViewInit {
 
         //add Category form
         this.addCategoryForm = formBuilder.group({
-            newCategory: formBuilder.control(null)
+            newCategory: new FormControl("", Validators.required),
         });
 
         //add Brand form
         this.addBrandForm = formBuilder.group({
-            newBrand: formBuilder.control(null)
+            newBrand: new FormControl("", Validators.required),
         });
 
         //get af auth status
