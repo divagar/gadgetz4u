@@ -72,7 +72,8 @@
                 <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory(addCategoryForm.value)">
                     <div class="input-group">
                         <span class="input-group-addon">Category Name</span>
-                        <input type="text" class="form-control" #newCategory required placeholder="New Category Name" formControlName="newCategory">
+                        <input type="text" class="form-control" #newCategory
+                        required placeholder="New Category Name" formControlName="newCategory">
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-primary">
@@ -86,7 +87,8 @@
                 <form [formGroup]="addBrandForm" (ngSubmit)="addBrand(addBrandForm.value)">
                     <div class="input-group">
                         <span class="input-group-addon">Brand Name</span>
-                        <input type="text" class="form-control" #newBrand required placeholder="New Brand Name" formControlName="newBrand">
+                        <input type="text" class="form-control" #newBrand
+                        required placeholder="New Brand Name" formControlName="newBrand">
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-primary">
@@ -100,55 +102,55 @@
                 <form [formGroup]="addProductForm" (ngSubmit)="addupdateProduct(addNewProduct, addProductForm.value)">
                     <div class="input-group">
                         <span class="input-group-addon">Name</span>
-                        <input type="text" class="form-control" #pName value="{{ (fbProductDetails | async)?.Name }}" required formControlName="Name">
+                        <input type="text" class="form-control" #pName formControlName="Name">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Description</span>
-                        <input type="text" class="form-control" #pDesc value="{{ (fbProductDetails | async)?.Description }}" required formControlName="Description">
+                        <input type="text" class="form-control" #pDesc formControlName="Description">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Image Link #1</span>
-                        <input type="text" class="form-control" #pImgLink value="{{ (fbProductDetails | async)?.ImageLink }}" required formControlName="ImageLink">
+                        <input type="text" class="form-control" #pImgLink formControlName="ImageLink">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Image Link #2</span>
-                        <input type="text" class="form-control" #pImgLink1 value="{{ (fbProductDetails | async)?.ImageLink1 }}" required formControlName="ImageLink1">
+                        <input type="text" class="form-control" #pImgLink1 formControlName="ImageLink1">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Image Link #3</span>
-                        <input type="text" class="form-control" #pImgLink2 value="{{ (fbProductDetails | async)?.ImageLink2 }}" required formControlName="ImageLink2">
+                        <input type="text" class="form-control" #pImgLink2 required formControlName="ImageLink2">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Image Link #4</span>
-                        <input type="text" class="form-control" #pImgLink3 value="{{ (fbProductDetails | async)?.ImageLink3 }}" required formControlName="ImageLink3">
+                        <input type="text" class="form-control" #pImgLink3 formControlName="ImageLink3">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Details</span>
                         <textarea tinyMCE class="form-control tinyMCE" rows="7" #pDetails>
                         {{ loadTinyMCE((fbProductDetails | async)?.Details) }}
-                    </textarea>
+                        </textarea>
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">MRP</span>
-                        <input type="text" class="form-control" #pMRP value="{{ (fbProductDetails | async)?.MRP }}" required formControlName="MRP">
+                        <input type="text" class="form-control" #pMRP formControlName="MRP">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Price</span>
-                        <input type="text" class="form-control" #pPrice value="{{ (fbProductDetails | async)?.Price }}" required formControlName="Price">
+                        <input type="text" class="form-control" #pPrice formControlName="Price">
                     </div>
                     <br/>
-                    <button *ngIf="addNewProduct" type="submit" class="btn btn-primary">
+                    <button *ngIf="addNewProduct" type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid">
                     Add Product
                     </button>
-                    <button *ngIf="selectedProduct" type="submit" class="btn btn-primary">
+                    <button *ngIf="selectedProduct" type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid">
                     Update
                     </button>
                     <button *ngIf="selectedProduct" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteProductModal">

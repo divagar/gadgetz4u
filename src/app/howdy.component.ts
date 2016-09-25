@@ -75,6 +75,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             ImageLink1: new FormControl("", Validators.required),
             ImageLink2: new FormControl("", Validators.required),
             ImageLink3: new FormControl("", Validators.required),
+            Details: new FormControl(""),
             MRP: new FormControl("", Validators.required),
             Price: new FormControl("", Validators.required),
         });
@@ -170,6 +171,10 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         var query: string = '/Products/' + index;
         console.log(query);
         this.fbProductDetails = this.af.database.object(query);
+        this.fbProductDetails.subscribe(_fbProductDetails => {
+            //set product form
+            this.setProductForm(_fbProductDetails);
+        });
     }
 
     newCategory() {
@@ -202,7 +207,27 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         this.addNewProduct = true;
 
         this.fbProductDetails = null;
+
+        //set product form
+        const myProduct = {};
+        this.setProductForm(myProduct);
         tinymce.activeEditor.setContent("");
+    }
+
+    setProductForm(data) {
+        const myProduct = {
+            Name: data.Name == undefined ? '' : data.Name,
+            Description: data.Description == undefined ? '' : data.Description,
+            ImageLink: data.ImageLink == undefined ? '' : data.ImageLink,
+            ImageLink1: data.ImageLink1 == undefined ? '' : data.ImageLink1,
+            ImageLink2: data.ImageLink2 == undefined ? '' : data.ImageLink2,
+            ImageLink3: data.ImageLink3 == undefined ? '' : data.ImageLink3,
+            Details: data.Details == undefined ? '' : data.Details,
+            MRP: data.MRP == undefined ? '' : data.MRP,
+            Price: data.Price == undefined ? '' : data.Price,
+        };
+        (<FormGroup>this.addProductForm)
+            .setValue(myProduct, { onlySelf: true });
     }
 
     addCategory(newCategoryVal) {
@@ -248,7 +273,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
         clearTimeout(this.timerTiny);
     }
 
-    addProduct(newProduct, productFormVal) {
+    addupdateProduct(newProduct, productFormVal) {
         var data: Object;
         var details = tinymce.activeEditor.getContent();
         data = {
@@ -266,7 +291,7 @@ export class HowdyComponent implements OnInit, AfterViewInit {
             'MRP': productFormVal.MRP,
             'Price': productFormVal.Price
         }
-        console.log(data);
+        //console.log(data);
         this.howdyalert('info', 'Processing.', true);
         if (newProduct) {
             var query: string = '/Products';
